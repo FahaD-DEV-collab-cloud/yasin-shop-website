@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+:root {
+  --color-brown-900: #3e2a24;
+  --color-brown-800: #4d332e;
+  --color-brown-700: #6d4c41;
+  --color-cream: #f7f1e3;
+  --color-cream-strong: #efe3c5;
+  --color-offwhite: #fffdf7;
+  --color-gold: #c9a227;
+  --color-gold-soft: #e7d39a;
+  --color-stone: #756b61;
+  --color-line: #e7d7b2;
+  --color-shadow: rgba(62, 42, 36, 0.12);
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "DM Sans", "Segoe UI", sans-serif;
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-9: 72px;
+  --space-10: 80px;
+  --space-12: 96px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(201, 162, 39, 0.09), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(109, 76, 65, 0.08), transparent 28%),
+    var(--color-cream);
+  color: var(--color-brown-900);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+  line-height: 0.96;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(201, 162, 39, 0.3);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+p,
+a,
+li,
+button,
+span {
+  font-family: var(--font-body);
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .marquee-track {
+    animation: marqueeScroll 24s linear infinite;
+  }
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  }
+}
