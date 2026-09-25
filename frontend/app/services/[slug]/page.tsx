@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, Clock3, Home, MessageCircleMore } from "lucide-react";
@@ -6,6 +7,37 @@ import { site } from "@/src/config/site";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const service = services.find((item) => item.slug === slug);
+
+  if (!service) {
+    return {
+      title: "Service Not Found | M.KHAN Digital Service Center",
+      description: "Service details not found.",
+    };
+  }
+
+  const title = `${service.name} in Lahore | M.KHAN Digital Service Center`;
+
+  return {
+    title,
+    description: service.shortDescription,
+    openGraph: {
+      title,
+      description: service.shortDescription,
+      siteName: "M.KHAN Digital Service Center",
+      type: "website",
+      locale: "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: service.shortDescription,
+    },
+  };
 }
 
 type PageProps = {
