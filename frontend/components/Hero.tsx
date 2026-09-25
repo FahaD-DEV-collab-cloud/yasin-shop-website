@@ -18,29 +18,32 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative overflow-hidden pb-14 pt-8 sm:pb-16 lg:pb-20">
-      <div className="absolute inset-0 opacity-80" style={{ backgroundImage: "radial-gradient(circle at top left, rgba(201,162,39,0.16), transparent 24%), radial-gradient(circle at bottom right, rgba(109,76,65,0.12), transparent 28%), linear-gradient(135deg, rgba(255,255,255,0.24), rgba(255,255,255,0))" }} />
+      <div className="absolute inset-0 opacity-90" style={{ backgroundImage: "radial-gradient(circle at top left, rgba(201,162,39,0.18), transparent 24%), radial-gradient(circle at bottom right, rgba(109,76,65,0.16), transparent 28%), linear-gradient(135deg, rgba(255,255,255,0.28), rgba(255,255,255,0))" }} />
 
       <div className="relative mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:px-8">
         <div>
-          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6D4C41]">
-            Digital Service Center
-          </p>
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#e0c98d] bg-[#fffaf0] px-3 py-1.5 shadow-[0_8px_18px_rgba(62,39,35,0.04)]">
+            <span className="h-2 w-2 rounded-full bg-[#c79d32]" />
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#6D4C41]">
+              Trusted Local Service Center
+            </p>
+          </div>
 
           <h1
-            className="max-w-xl text-4xl font-black leading-[0.9] tracking-[-0.07em] text-[#2B2118] sm:text-5xl lg:text-[4.3rem]"
+            className="max-w-xl text-4xl font-black leading-[0.9] tracking-[-0.07em] text-[#2B2118] sm:text-5xl lg:text-[4.4rem]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Print. Pay. Apply. <span className="text-[#6D4C41]">Done.</span>
           </h1>
 
           <p className="mt-5 max-w-xl text-base leading-7 text-[#5d514b] sm:text-lg">
-            Form bharwana hai? Photocopy chahiye? Easypaisa, NADRA, job forms, printing — sab yahin, fast and easy.
+            Form bharwana hai? Photocopy chahiye? Easypaisa, NADRA, job forms, printing — sab yahin, fast, accurate, and easy.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               href="#services"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#3E2723] px-6 py-3.5 text-sm font-semibold text-[#F7F1E3] shadow-[0_14px_28px_rgba(62,39,35,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2d1d1a]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#3E2723] px-6 py-3.5 text-sm font-semibold text-[#F7F1E3] shadow-[0_16px_30px_rgba(62,39,35,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2d1d1a]"
             >
               View Services
               <ArrowRight className="h-4 w-4" />
@@ -51,18 +54,22 @@ export default function Hero() {
               rel="noreferrer"
               className="inline-flex items-center justify-center rounded-full border border-[#c9a227] bg-[#fff8e8] px-6 py-3.5 text-sm font-semibold text-[#3E2723] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#b48d1f] hover:bg-[#f9edd0]"
             >
-              WhatsApp
+              WhatsApp Now
             </a>
           </div>
 
           <div className="mt-7 flex flex-wrap gap-3">
-            <div className="rounded-[1rem] border border-[#e8dcb5] bg-[#fffdf9] px-3 py-2 shadow-sm">
+            <div className="soft-ring rounded-[1.15rem] border border-[#e8dcb5] bg-[#fffdf9] px-3 py-2.5 shadow-sm">
               <p className="text-xl font-black tracking-[-0.05em] text-[#2B2118]">{site.customersServed}</p>
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Customers helped</p>
             </div>
-            <div className="rounded-[1rem] border border-[#e8dcb5] bg-[#fffdf9] px-3 py-2 shadow-sm">
+            <div className="soft-ring rounded-[1.15rem] border border-[#e8dcb5] bg-[#fffdf9] px-3 py-2.5 shadow-sm">
               <p className="text-xl font-black tracking-[-0.05em] text-[#2B2118]">{site.establishedYear}</p>
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Since</p>
+            </div>
+            <div className="soft-ring rounded-[1.15rem] border border-[#e8dcb5] bg-[#fffdf9] px-3 py-2.5 shadow-sm">
+              <p className="text-xl font-black tracking-[-0.05em] text-[#2B2118]">9 AM-9 PM</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Open six days</p>
             </div>
           </div>
 
@@ -73,7 +80,7 @@ export default function Hero() {
                 href={buildWhatsAppLink(message)}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center gap-2 rounded-full border border-[#e8dcb5] bg-[#fffdf9] px-2.5 py-2 text-[11px] font-medium text-[#3E2723] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#d5b457] hover:bg-[#fffaf0]"
+                className="group flex items-center gap-2 rounded-full border border-[#e8dcb5] bg-[#fffdf9]/90 px-2.5 py-2 text-[11px] font-medium text-[#3E2723] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#d5b457] hover:bg-[#fffaf0]"
               >
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#f7f1e3] text-[#3E2723]">
                   <Icon className="h-3.5 w-3.5" />
@@ -90,7 +97,7 @@ export default function Hero() {
             <div className="absolute -right-6 bottom-12 h-28 w-28 rounded-full bg-[#6D4C41]/12 blur-3xl" />
 
             <div
-              className="relative overflow-hidden rounded-[2rem] border border-[#e6d6a9] bg-[#fffdf7] p-4 shadow-[0_30px_70px_rgba(62,39,35,0.12)]"
+              className="section-shell relative overflow-hidden rounded-[2rem] border-[#e6d6a9] bg-[#fffdf7] p-4"
               style={{ backgroundImage: "radial-gradient(rgba(62,42,36,0.025) 1px, transparent 1px)", backgroundSize: "8px 8px" }}
             >
               <div className="pointer-events-none absolute inset-0 opacity-40" style={{ backgroundImage: "radial-gradient(rgba(62,42,36,0.12) 0.8px, transparent 0.8px)", backgroundSize: "7px 7px" }} />

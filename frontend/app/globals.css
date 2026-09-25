@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --color-brown-900: #3e2a24;
-  --color-brown-800: #4d332e;
-  --color-brown-700: #6d4c41;
-  --color-cream: #f7f1e3;
-  --color-cream-strong: #efe3c5;
-  --color-offwhite: #fffdf7;
-  --color-gold: #c9a227;
-  --color-gold-soft: #e7d39a;
-  --color-stone: #756b61;
+  --color-brown-900: #2c1f1b;
+  --color-brown-800: #3f2b27;
+  --color-brown-700: #5d403b;
+  --color-cream: #f6efe5;
+  --color-cream-strong: #efe2bf;
+  --color-offwhite: #fffdf9;
+  --color-gold: #c79d32;
+  --color-gold-soft: #f1ddb0;
+  --color-stone: #72615d;
   --color-line: #e7d7b2;
-  --color-shadow: rgba(62, 42, 36, 0.12);
+  --color-shadow: rgba(40, 29, 24, 0.12);
 
   --font-display: "Fraunces", "Georgia", serif;
   --font-body: "DM Sans", "Segoe UI", sans-serif;
@@ -35,14 +35,15 @@ html {
 
 body {
   background:
-    radial-gradient(circle at top left, rgba(201, 162, 39, 0.09), transparent 22%),
-    radial-gradient(circle at bottom right, rgba(109, 76, 65, 0.08), transparent 28%),
-    var(--color-cream);
+    radial-gradient(circle at top left, rgba(199, 157, 50, 0.12), transparent 18%),
+    radial-gradient(circle at bottom right, rgba(93, 64, 59, 0.08), transparent 22%),
+    linear-gradient(180deg, #f8f0e2 0%, #f3e9d7 100%);
   color: var(--color-brown-900);
   font-family: var(--font-body);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 h1,
@@ -61,7 +62,7 @@ h6 {
 }
 
 ::selection {
-  background: rgba(201, 162, 39, 0.3);
+  background: rgba(199, 157, 50, 0.26);
 }
 
 img {
@@ -75,6 +76,10 @@ li,
 button,
 span {
   font-family: var(--font-body);
+}
+
+a {
+  transition: color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
 @layer utilities {
@@ -92,6 +97,18 @@ span {
 
   .marquee-track {
     animation: marqueeScroll 24s linear infinite;
+  }
+
+  .section-shell {
+    position: relative;
+    border: 1px solid rgba(156, 124, 79, 0.18);
+    background: rgba(255, 253, 249, 0.7);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 18px 42px rgba(45, 31, 25, 0.05);
+  }
+
+  .soft-ring {
+    box-shadow: inset 0 0 0 1px rgba(199, 157, 50, 0.14), 0 10px 24px rgba(45, 31, 25, 0.04);
   }
 }
 

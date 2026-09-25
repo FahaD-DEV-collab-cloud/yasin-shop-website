@@ -37,6 +37,12 @@ export const metadata: Metadata = {
   ],
   applicationName: site.businessName,
   category: "local business",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   alternates: {
     canonical: "/",
   },
