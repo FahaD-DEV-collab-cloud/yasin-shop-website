@@ -13,52 +13,23 @@ import {
   Monitor,
   Printer,
   Search,
-  Smartphone,
   WalletCards,
-  type LucideIcon,
 } from "lucide-react";
+import { ServiceCard } from "@/components/ServiceCard";
 import services from "@/src/data/services";
 import { site } from "@/src/config/site";
 
 export const tabs = ["All", "Payments", "Documents", "Government", "Education", "Other"] as const;
 export type Tab = (typeof tabs)[number];
 
-const iconMap: Record<string, LucideIcon> = {
-  easypaisa: WalletCards,
-  jazzcash: Smartphone,
-  "nadra-e-sahulat": BadgeCheck,
-  "online-job-applications": BriefcaseBusiness,
-  "government-schemes": BookOpenText,
-  "government-private-job-applications": BriefcaseBusiness,
-  "university-college-admissions": GraduationCap,
-  "online-forms-applications": FileText,
-  "loan-applications": WalletCards,
-  "fbr-income-tax-return-services": FileText,
-  "online-registration-verification": BadgeCheck,
-  "biometric-services": BadgeCheck,
-  "mobile-accessories": Smartphone,
-  printing: Printer,
-  photocopy: FileText,
-  "color-printing": Printer,
-  "printing-color-printing": Printer,
-  "photocopy-xerox": FileText,
-  "composing-typing": FileText,
-  "passport-size-photos": Smartphone,
-  "photo-editing-document-scanning": FileText,
-  "document-scanning": FileText,
-  "email-online-account-assistance": Smartphone,
-  "all-online-government-services": BadgeCheck,
-  "cv-resume-making": FileText,
-  "computer-internet-services": Monitor,
-  "online-certificates-documents": FileText,
-  "visa-travel-related-online-applications": BookOpenText,
-  "polio-certificate-online-record-services": BadgeCheck,
-  "online-banking-digital-application-assistance": WalletCards,
-  "bank-services": BookOpenText,
-  "book-binding": BookOpenText,
-  "id-card-copy": BadgeCheck,
-  "songs-movies": Smartphone,
-};
+const categoryIcons = {
+  Payments: WalletCards,
+  Documents: FileText,
+  Government: BadgeCheck,
+  Education: GraduationCap,
+  Other: BriefcaseBusiness,
+  Printing: Printer,
+} as const;
 
 export const normalize = (value: string) => value.trim().toLowerCase();
 
@@ -111,53 +82,6 @@ export const getBucket = (service: (typeof services)[number]): Exclude<Tab, "All
   return "Other";
 };
 
-export function ServiceListRow({ service }: { service: (typeof services)[number] }) {
-  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-    `Assalam-o-Alaikum, ${service.name} ka service chahiye.`
-  )}`;
-
-  return (
-    <div className="group flex flex-col gap-3 rounded-[1.2rem] border border-[#f0e4be] bg-[#fffdf9] p-4 transition-colors hover:bg-[#fffaf0] sm:flex-row sm:items-center sm:justify-between">
-      <div className="min-w-0 flex-1">
-        <Link href={`/services/${service.slug}`} className="block">
-          <h3 className="text-base font-bold tracking-[-0.02em] text-[#2B2118] transition-colors hover:text-[#6D4C41] sm:text-lg">
-            {service.name}
-          </h3>
-        </Link>
-        <p className="mt-1 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
-        <div className="mt-2 flex items-center justify-between gap-3">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
-            {getPriceHint(service)}
-          </p>
-          <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
-            {service.category}
-          </span>
-        </div>
-      </div>
-
-      <div className="flex shrink-0 items-center gap-2">
-        <Link
-          href={`/services/${service.slug}`}
-          className="inline-flex items-center gap-2 rounded-full border border-[#e7d7b2] bg-[#fff] px-3 py-2 text-xs font-semibold text-[#3E2723] transition-colors hover:border-[#c9a227] hover:bg-[#fff7e7]"
-        >
-          Get Service
-          <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
-
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Chat on WhatsApp about ${service.name}`}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e7d7b2] bg-[#fff] text-[#3E2723] transition-all duration-300 hover:border-[#c9a227] hover:bg-[#fff7e7]"
-        >
-          <MessageCircleMore className="h-4 w-4" />
-        </a>
-      </div>
-    </div>
-  );
-}
-
 export function ServiceCategoryGroup({
   groupName,
   groupServices,
@@ -165,16 +89,26 @@ export function ServiceCategoryGroup({
   groupName: string;
   groupServices: Array<(typeof services)[number]>;
 }) {
+  const Icon = categoryIcons[groupName as keyof typeof categoryIcons] ?? BookOpenText;
+
   return (
     <div className="px-5 py-5 sm:px-8 sm:py-6">
-      <div className="mb-4 flex items-center justify-between gap-3 border-b border-dashed border-[#ead7a4] pb-3">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">{groupName}</p>
-        <span className="text-xs text-[#6D4C41]">{groupServices.length} service{groupServices.length === 1 ? "" : "s"}</span>
+      <div className="mb-5 flex items-center justify-between gap-3 border-b border-[#ead7a4] pb-3">
+        <div className="flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#ead9a7] bg-[#fffaf0] text-[#3E2723] shadow-[0_8px_16px_rgba(62,39,35,0.04)]">
+            <Icon className="h-4 w-4" />
+          </span>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">{groupName}</p>
+        </div>
+
+        <span className="rounded-full border border-[#ead9a7] bg-[#fffaf0] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
+          {groupServices.length} service{groupServices.length === 1 ? "" : "s"}
+        </span>
       </div>
 
-      <div className="space-y-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {groupServices.map((service) => (
-          <ServiceListRow key={service.slug} service={service} />
+          <ServiceCard key={service.slug} service={service} />
         ))}
       </div>
     </div>
@@ -250,33 +184,35 @@ export function ServiceCatalog() {
         </div>
       </div>
 
-      <div className="mt-10 rounded-[2rem] border border-[#e7d7b2] bg-[#fffdf9] shadow-[0_18px_36px_rgba(62,39,35,0.06)]">
+      <div className="mt-10">
         {filteredServices.length === 0 ? (
-          <div className="flex flex-col items-center justify-center gap-4 px-5 py-12 text-center">
+          <div className="rounded-[2rem] border border-[#e7d7b2] bg-[#fffdf9] px-5 py-12 text-center shadow-[0_18px_36px_rgba(62,39,35,0.06)]">
             <p className="text-lg font-bold text-[#2B2118]">No services found.</p>
             <a
               href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalam-o-Alaikum, mujhe service ke liye contact karna hai.")}`}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fffaf0] px-4 py-2.5 text-sm font-semibold text-[#3E2723] transition-colors hover:border-[#c9a227] hover:bg-[#fff7e7]"
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fffaf0] px-4 py-2.5 text-sm font-semibold text-[#3E2723] transition-colors hover:border-[#c9a227] hover:bg-[#fff7e7]"
             >
               Message us on WhatsApp
               <MessageCircleMore className="h-4 w-4" />
             </a>
           </div>
+        ) : activeTab === "All" && Object.entries(groupedServices).length > 0 ? (
+          <div className="space-y-6">
+            {Object.entries(groupedServices).map(([groupName, groupServices]) => (
+              <div key={groupName} className="rounded-[2rem] border border-[#e7d7b2] bg-[#fffdf9] shadow-[0_18px_36px_rgba(62,39,35,0.06)]">
+                <ServiceCategoryGroup groupName={groupName} groupServices={groupServices} />
+              </div>
+            ))}
+          </div>
         ) : (
-          <div className="divide-y divide-dashed divide-[#d8c79d]">
-            {activeTab === "All" && Object.entries(groupedServices).length > 0 ? (
-              Object.entries(groupedServices).map(([groupName, groupServices]) => (
-                <ServiceCategoryGroup key={groupName} groupName={groupName} groupServices={groupServices} />
-              ))
-            ) : (
-              filteredServices.map((service) => (
-                <div key={service.slug} className="px-5 py-5 sm:px-8 sm:py-6">
-                  <ServiceListRow service={service} />
-                </div>
-              ))
-            )}
+          <div className="rounded-[2rem] border border-[#e7d7b2] bg-[#fffdf9] p-5 shadow-[0_18px_36px_rgba(62,39,35,0.06)] sm:p-8">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredServices.map((service) => (
+                <ServiceCard key={service.slug} service={service} />
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -302,7 +238,7 @@ export default function Services() {
 
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {featuredServices.map((service) => {
-            const Icon = iconMap[service.slug] ?? FileText;
+            const Icon = Monitor;
             const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
               `Assalam-o-Alaikum, ${service.name} ka rate aur details chahiye.`
             )}`;
@@ -372,7 +308,41 @@ export default function Services() {
 
             <div className="space-y-3">
               {previewServices.map((service) => (
-                <ServiceListRow key={service.slug} service={service} />
+                <div key={service.slug} className="group flex flex-col gap-3 rounded-[1.2rem] border border-[#f0e4be] bg-[#fffdf9] p-4 transition-colors hover:bg-[#fffaf0] sm:flex-row sm:items-center sm:justify-between">
+                  <div className="min-w-0 flex-1">
+                    <Link href={`/services/${service.slug}`} className="block">
+                      <h3 className="text-base font-bold tracking-[-0.02em] text-[#2B2118] transition-colors hover:text-[#6D4C41] sm:text-lg">
+                        {service.name}
+                      </h3>
+                    </Link>
+                    <p className="mt-1 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
+                    <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
+                      {getPriceHint(service)}
+                    </p>
+                  </div>
+
+                  <div className="flex shrink-0 items-center gap-2">
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-[#e7d7b2] bg-[#fffaf0] px-3 py-2 text-xs font-semibold text-[#3E2723] transition-all duration-200 hover:border-[#c9a227] hover:bg-[#f8f0de]"
+                    >
+                      Get Service
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+
+                    <a
+                      href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+                        `Assalam-o-Alaikum, ${service.name} ka service chahiye.`
+                      )}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Chat on WhatsApp about ${service.name}`}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e7d7b2] bg-[#fffaf0] text-[#3E2723] transition-all duration-300 hover:border-[#c9a227] hover:bg-[#f8f0de]"
+                    >
+                      <MessageCircleMore className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
               ))}
             </div>
 

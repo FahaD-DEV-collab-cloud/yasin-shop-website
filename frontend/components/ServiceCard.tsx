@@ -1,73 +1,97 @@
 import Link from "next/link";
-import { ArrowRight, MessageCircleMore, type LucideIcon } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  BookOpenText,
+  BriefcaseBusiness,
+  Copy,
+  FileCheck2,
+  FileText,
+  GraduationCap,
+  Landmark,
+  MessageCircleMore,
+  Monitor,
+  Palette,
+  Printer,
+  Smartphone,
+  WalletCards,
+  type LucideIcon,
+} from "lucide-react";
+import services from "@/src/data/services";
 import { site } from "@/src/config/site";
 
-type ServiceCardProps = {
-  slug: string;
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  variant?: "default" | "featured";
+type Service = (typeof services)[number];
+
+const iconMap: Record<string, LucideIcon> = {
+  Wallet: WalletCards,
+  Smartphone: Smartphone,
+  IdCard: BadgeCheck,
+  BriefcaseBusiness: BriefcaseBusiness,
+  ShieldCheck: BadgeCheck,
+  Printer: Printer,
+  Copy: Copy,
+  Palette: Palette,
+  GraduationCap: GraduationCap,
+  FileText: FileText,
+  Landmark: Landmark,
+  FileCheck2: FileCheck2,
+  Monitor: Monitor,
+  BookOpenText: BookOpenText,
+  BadgeCheck: BadgeCheck,
 };
 
-export default function ServiceCard({
-  slug,
-  icon: Icon,
-  title,
-  description,
-  variant = "default",
-}: ServiceCardProps) {
-  const isFeatured = variant === "featured";
+const getPriceHint = (service: Service) => service.pricing.amount || "Custom quote";
+
+export function ServiceCard({ service }: { service: Service }) {
+  const Icon = iconMap[service.icon] ?? FileText;
   const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-    `Assalam-o-Alaikum, ${title} ka rate aur details chahiye.`
+    `Assalam-o-Alaikum, ${service.name} ka service chahiye.`
   )}`;
 
   return (
-    <article
-      className={`group relative overflow-hidden rounded-[1.75rem] border p-5 shadow-[0_12px_28px_rgba(62,39,35,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_42px_rgba(62,39,35,0.12)] ${
-        isFeatured
-          ? "border-[#d4b05d] bg-[linear-gradient(180deg,#fffaf0,#fffdf7)]"
-          : "border-[#e9dcc2] bg-[#fffdf7]"
-      }`}
-    >
-      <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#C9A227,#D7B765,#C9A227)] opacity-80" />
-
-      <div className="absolute right-4 top-4 z-10">
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Chat on WhatsApp about ${title}`}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e2d4b5] bg-[#fffaf0] text-[#3E2723] transition-all duration-200 hover:border-[#c9a227] hover:bg-[#fff7e7] hover:text-[#6D4C41]"
-        >
-          <MessageCircleMore className="h-4 w-4" />
-        </a>
+    <article className="group flex h-full flex-col rounded-[1.5rem] border border-[#e8d5a3] bg-[#fffdf9] p-4 shadow-[0_12px_26px_rgba(62,39,35,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#d2b66c] hover:shadow-[0_18px_34px_rgba(62,39,35,0.08)]">
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#ead9a7] bg-[#fffaf0] text-[#3E2723] shadow-[0_8px_16px_rgba(62,39,35,0.04)]">
+          <Icon className="h-5 w-5" />
+        </span>
+        <span className="rounded-full border border-[#ead9a7] bg-[#fffaf0] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
+          {service.category}
+        </span>
       </div>
 
-      <div
-        className={`relative mb-5 inline-flex rounded-2xl p-3 ${
-          isFeatured ? "bg-[#3E2723] text-[#F7F1E3]" : "bg-[#F7F1E3] text-[#3E2723]"
-        }`}
-      >
-        <Icon className="h-6 w-6" />
-      </div>
-
-      <Link href={`/services/${slug}`} className="block">
-        <h3 className="text-xl font-bold text-[#2B2118] transition-colors group-hover:text-[#6D4C41]">
-          {title}
+      <Link href={`/services/${service.slug}`} className="block">
+        <h3 className="text-xl font-black tracking-[-0.04em] text-[#2B2118] transition-colors hover:text-[#6D4C41]">
+          {service.name}
         </h3>
       </Link>
 
-      <p className="mt-3 text-sm leading-7 text-[#5d514b]">{description}</p>
+      <p className="mt-2 line-clamp-3 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
 
-      <div className="mt-5 flex items-center gap-2">
-        <Link
-          href={`/services/${slug}`}
-          className="inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fffaf0] px-3.5 py-2 text-sm font-semibold text-[#3E2723] transition-all duration-200 hover:border-[#c9a227] hover:bg-[#fff7e7] hover:text-[#6D4C41]"
-        >
-          Get Service
-          <ArrowRight className="h-4 w-4" />
-        </Link>
+      <div className="mt-auto pt-4">
+        <div className="mb-3 rounded-xl border border-[#f0e4be] bg-[#fffaf0] px-3 py-2">
+          <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Price hint</p>
+          <p className="mt-1 text-sm font-semibold text-[#2B2118]">{getPriceHint(service)}</p>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/services/${service.slug}`}
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-[#e7d7b2] bg-[#fffaf0] px-3 py-2.5 text-sm font-semibold text-[#3E2723] transition-all hover:border-[#c9a227] hover:bg-[#fff7e7]"
+          >
+            Get Service
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Chat on WhatsApp about ${service.name}`}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-[#e7d7b2] bg-[#fff] text-[#3E2723] transition-all duration-300 hover:border-[#c9a227] hover:bg-[#fff7e7]"
+          >
+            <MessageCircleMore className="h-4 w-4" />
+          </a>
+        </div>
       </div>
     </article>
   );
