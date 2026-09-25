@@ -5,6 +5,7 @@ export type Service = {
   name: string;
   category: string;
   featured?: boolean;
+  popular?: boolean;
   shortDescription: string;
   longDescription: string;
   pricing: {
@@ -23,6 +24,7 @@ const services: Service[] = [
     name: "Easypaisa",
     category: "Payments",
     featured: true,
+    popular: true,
     shortDescription: "Cash-in, cash-out, utility payments, and mobile wallet support at your nearest shop.",
     longDescription:
       "We help customers with Easypaisa account services including cash-in, cash-out, bill payments, and wallet-related support. The process is quick, secure, and designed for everyday transactions without the hassle of standing in long queues.",
@@ -40,6 +42,7 @@ const services: Service[] = [
     name: "JazzCash",
     category: "Payments",
     featured: true,
+    popular: true,
     shortDescription: "Fast JazzCash transfers, top-ups, and account services with easy local support.",
     longDescription:
       "JazzCash services include money transfers, mobile top-ups, utility payments, and profile assistance for common wallet needs. Our team makes the process smooth so customers can complete transactions quickly and confidently.",
@@ -57,6 +60,7 @@ const services: Service[] = [
     name: "NADRA / E-Sahulat",
     category: "Documents",
     featured: true,
+    popular: true,
     shortDescription: "NADRA form support and E-Sahulat services for identity and documentation tasks.",
     longDescription:
       "We assist with NADRA and E-Sahulat-related tasks such as form submission, status checking, and document guidance. The service is helpful for customers who want a smoother visit without confusion about required steps or forms.",
@@ -106,6 +110,7 @@ const services: Service[] = [
     name: "Printing",
     category: "Printing",
     featured: true,
+    popular: true,
     shortDescription: "Quick document and assignment printing for students, offices, and everyday needs.",
     longDescription:
       "We print documents, assignments, forms, and study material in a clean and efficient manner. Whether it is black-and-white or simple office printing, the process is fast and dependable for urgent jobs.",
@@ -138,6 +143,7 @@ const services: Service[] = [
     slug: "color-printing",
     name: "Color Printing",
     category: "Printing",
+    popular: true,
     shortDescription: "Color copies and printouts for flyers, photos, and presentation material.",
     longDescription:
       "Color printing is available for invitations, business materials, colorful reports, and personal photos. We provide clear printing output with flexible sizes and quantity options for both small and bulk jobs.",
@@ -154,6 +160,7 @@ const services: Service[] = [
     slug: "government-private-job-applications",
     name: "Government & Private Job Applications",
     category: "Documents",
+    popular: true,
     shortDescription: "Support for applying to government and private jobs with forms, documents, and guidance.",
     longDescription:
       "We help customers prepare and submit applications for both government and private job openings. From document checking to form completion, our support makes the application process quicker and more reliable.",
@@ -186,6 +193,7 @@ const services: Service[] = [
     slug: "online-forms-applications",
     name: "Online Forms & Applications",
     category: "Documents",
+    popular: true,
     shortDescription: "Quick help with key online forms, applications, and document submission tasks.",
     longDescription:
       "We support customers with online forms and application submissions for education, government, private services, and other formal processes. Whether it is a short form or a lengthy application, we help complete it correctly and efficiently.",
@@ -298,6 +306,7 @@ const services: Service[] = [
     slug: "photocopy-xerox",
     name: "Photocopy / Xerox",
     category: "Printing",
+    popular: true,
     shortDescription: "Affordable photocopy and xerox support for study notes, documents, and forms.",
     longDescription:
       "Our photocopy and xerox service is useful for students, professionals, and families who need clean copies of papers, forms, cards, and certificates. We provide quick service with attention to clarity and quantity.",

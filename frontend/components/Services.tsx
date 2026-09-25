@@ -20,8 +20,8 @@ import {
 import services from "@/src/data/services";
 import { site } from "@/src/config/site";
 
-const tabs = ["All", "Payments", "Documents", "Government", "Education", "Other"] as const;
-type Tab = (typeof tabs)[number];
+export const tabs = ["All", "Payments", "Documents", "Government", "Education", "Other"] as const;
+export type Tab = (typeof tabs)[number];
 
 const iconMap: Record<string, LucideIcon> = {
   easypaisa: WalletCards,
@@ -60,13 +60,11 @@ const iconMap: Record<string, LucideIcon> = {
   "songs-movies": Smartphone,
 };
 
-const featuredServices = services.filter((service) => service.featured).slice(0, 4);
+export const normalize = (value: string) => value.trim().toLowerCase();
 
-const getPriceHint = (service: (typeof services)[number]) => service.pricing.amount || "Custom quote";
+export const getPriceHint = (service: (typeof services)[number]) => service.pricing.amount || "Custom quote";
 
-const normalize = (value: string) => value.toLowerCase();
-
-const getBucket = (service: (typeof services)[number]): Exclude<Tab, "All"> => {
+export const getBucket = (service: (typeof services)[number]): Exclude<Tab, "All"> => {
   const name = normalize(service.name);
   const category = normalize(service.category);
 
@@ -113,13 +111,82 @@ const getBucket = (service: (typeof services)[number]): Exclude<Tab, "All"> => {
   return "Other";
 };
 
-export default function Services() {
+export function ServiceListRow({ service }: { service: (typeof services)[number] }) {
+  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+    `Assalam-o-Alaikum, ${service.name} ka service chahiye.`
+  )}`;
+
+  return (
+    <div className="group flex flex-col gap-3 rounded-[1.2rem] border border-[#f0e4be] bg-[#fffdf9] p-4 transition-colors hover:bg-[#fffaf0] sm:flex-row sm:items-center sm:justify-between">
+      <div className="min-w-0 flex-1">
+        <Link href={`/services/${service.slug}`} className="block">
+          <h3 className="text-base font-bold tracking-[-0.02em] text-[#2B2118] transition-colors hover:text-[#6D4C41] sm:text-lg">
+            {service.name}
+          </h3>
+        </Link>
+        <p className="mt-1 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
+        <div className="mt-2 flex items-center justify-between gap-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
+            {getPriceHint(service)}
+          </p>
+          <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
+            {service.category}
+          </span>
+        </div>
+      </div>
+
+      <div className="flex shrink-0 items-center gap-2">
+        <Link
+          href={`/services/${service.slug}`}
+          className="inline-flex items-center gap-2 rounded-full border border-[#e7d7b2] bg-[#fff] px-3 py-2 text-xs font-semibold text-[#3E2723] transition-colors hover:border-[#c9a227] hover:bg-[#fff7e7]"
+        >
+          Get Service
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Chat on WhatsApp about ${service.name}`}
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e7d7b2] bg-[#fff] text-[#3E2723] transition-all duration-300 hover:border-[#c9a227] hover:bg-[#fff7e7]"
+        >
+          <MessageCircleMore className="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  );
+}
+
+export function ServiceCategoryGroup({
+  groupName,
+  groupServices,
+}: {
+  groupName: string;
+  groupServices: Array<(typeof services)[number]>;
+}) {
+  return (
+    <div className="px-5 py-5 sm:px-8 sm:py-6">
+      <div className="mb-4 flex items-center justify-between gap-3 border-b border-dashed border-[#ead7a4] pb-3">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">{groupName}</p>
+        <span className="text-xs text-[#6D4C41]">{groupServices.length} service{groupServices.length === 1 ? "" : "s"}</span>
+      </div>
+
+      <div className="space-y-3">
+        {groupServices.map((service) => (
+          <ServiceListRow key={service.slug} service={service} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function ServiceCatalog() {
   const [activeTab, setActiveTab] = useState<Tab>("All");
   const [query, setQuery] = useState("");
-  const [showAll, setShowAll] = useState(false);
 
   const filteredServices = useMemo(() => {
-    const searchValue = normalize(query.trim());
+    const searchValue = normalize(query);
 
     return services.filter((service) => {
       const matchesSearch =
@@ -129,28 +196,99 @@ export default function Services() {
 
       const matchesTab = activeTab === "All" || getBucket(service) === activeTab;
 
-      return matchesTab && matchesSearch && !service.featured;
+      return matchesTab && matchesSearch;
     });
   }, [activeTab, query]);
 
-  const visibleServices = useMemo(() => {
-    const defaultLimit = 9;
-    return showAll ? filteredServices : filteredServices.slice(0, defaultLimit);
-  }, [filteredServices, showAll]);
-
   const groupedServices = useMemo(() => {
-    const groups: Record<string, typeof filteredServices> = {};
+    const groups: Record<string, Array<(typeof services)[number]>> = {};
 
-    for (const service of visibleServices) {
+    for (const service of filteredServices) {
       const bucket = getBucket(service);
       if (!groups[bucket]) groups[bucket] = [];
       groups[bucket].push(service);
     }
 
     return groups;
-  }, [visibleServices]);
+  }, [filteredServices]);
 
-  const hasMore = filteredServices.length > visibleServices.length && !showAll;
+  return (
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mt-6 rounded-[2rem] border border-[#ead9a7] bg-[#fffdf9] p-4 shadow-[0_18px_38px_rgba(62,39,35,0.05)] sm:p-6">
+        <div className="relative">
+          <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6D4C41]" />
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search services..."
+            className="w-full rounded-full border border-[#e2d4b5] bg-[#fffaf0] py-3 pl-11 pr-4 text-sm text-[#2B2118] outline-none transition focus:border-[#c9a227] focus:ring-4 focus:ring-[#e9dcc2]"
+          />
+        </div>
+
+        <div className="mt-4 overflow-x-auto pb-1">
+          <div className="flex min-w-max gap-2">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab;
+
+              return (
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => setActiveTab(tab)}
+                  className={[
+                    "rounded-full border px-4 py-2 text-sm font-semibold transition-all",
+                    isActive
+                      ? "border-[#3E2723] bg-[#3E2723] text-[#fffdf7] shadow-[0_10px_22px_rgba(62,39,35,0.15)]"
+                      : "border-[#e2d4b5] bg-[#fffaf0] text-[#3E2723] hover:border-[#c9a227] hover:bg-[#fff7e7]",
+                  ].join(" ")}
+                >
+                  {tab}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10 rounded-[2rem] border border-[#e7d7b2] bg-[#fffdf9] shadow-[0_18px_36px_rgba(62,39,35,0.06)]">
+        {filteredServices.length === 0 ? (
+          <div className="flex flex-col items-center justify-center gap-4 px-5 py-12 text-center">
+            <p className="text-lg font-bold text-[#2B2118]">No services found.</p>
+            <a
+              href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalam-o-Alaikum, mujhe service ke liye contact karna hai.")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fffaf0] px-4 py-2.5 text-sm font-semibold text-[#3E2723] transition-colors hover:border-[#c9a227] hover:bg-[#fff7e7]"
+            >
+              Message us on WhatsApp
+              <MessageCircleMore className="h-4 w-4" />
+            </a>
+          </div>
+        ) : (
+          <div className="divide-y divide-dashed divide-[#d8c79d]">
+            {activeTab === "All" && Object.entries(groupedServices).length > 0 ? (
+              Object.entries(groupedServices).map(([groupName, groupServices]) => (
+                <ServiceCategoryGroup key={groupName} groupName={groupName} groupServices={groupServices} />
+              ))
+            ) : (
+              filteredServices.map((service) => (
+                <div key={service.slug} className="px-5 py-5 sm:px-8 sm:py-6">
+                  <ServiceListRow service={service} />
+                </div>
+              ))
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const featuredServices = services.filter((service) => service.featured).slice(0, 4);
+const popularServices = services.filter((service) => service.popular).slice(0, 8);
+
+export default function Services() {
+  const previewServices = popularServices.length > 0 ? popularServices : services.slice(0, 8);
 
   return (
     <section id="services" className="reveal py-18 sm:py-20">
@@ -160,48 +298,6 @@ export default function Services() {
           <h2 className="mt-4 text-3xl font-black tracking-[-0.05em] text-[#2B2118] sm:text-4xl">
             Fast service, honest help, and no running around.
           </h2>
-        </div>
-
-        <div className="mt-10 rounded-[2rem] border border-[#ead9a7] bg-[#fffdf9] p-4 shadow-[0_18px_38px_rgba(62,39,35,0.05)] sm:p-6">
-          <div className="relative">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6D4C41]" />
-            <input
-              value={query}
-              onChange={(event) => {
-                setQuery(event.target.value);
-                setShowAll(false);
-              }}
-              placeholder="Search services..."
-              className="w-full rounded-full border border-[#e2d4b5] bg-[#fffaf0] py-3 pl-11 pr-4 text-sm text-[#2B2118] outline-none transition focus:border-[#c9a227] focus:ring-4 focus:ring-[#e9dcc2]"
-            />
-          </div>
-
-          <div className="mt-4 overflow-x-auto pb-1">
-            <div className="flex min-w-max gap-2">
-              {tabs.map((tab) => {
-                const isActive = activeTab === tab;
-
-                return (
-                  <button
-                    key={tab}
-                    type="button"
-                    onClick={() => {
-                      setActiveTab(tab);
-                      setShowAll(false);
-                    }}
-                    className={[
-                      "rounded-full border px-4 py-2 text-sm font-semibold transition-all",
-                      isActive
-                        ? "border-[#3E2723] bg-[#3E2723] text-[#fffdf7] shadow-[0_10px_22px_rgba(62,39,35,0.15)]"
-                        : "border-[#e2d4b5] bg-[#fffaf0] text-[#3E2723] hover:border-[#c9a227] hover:bg-[#fff7e7]",
-                    ].join(" ")}
-                  >
-                    {tab}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -267,150 +363,29 @@ export default function Services() {
           })}
         </div>
 
-        <div className="mt-12 rounded-[2rem] border border-[#e7d7b2] bg-[#fffdf9] shadow-[0_18px_36px_rgba(62,39,35,0.06)]">
-          {filteredServices.length === 0 ? (
-            <div className="flex flex-col items-center justify-center gap-4 px-5 py-12 text-center">
-              <p className="text-lg font-bold text-[#2B2118]">No services found.</p>
-              <a
-                href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalam-o-Alaikum, mujhe service ke liye contact karna hai.")}`}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fffaf0] px-4 py-2.5 text-sm font-semibold text-[#3E2723] transition-colors hover:border-[#c9a227] hover:bg-[#fff7e7]"
+        <div className="mt-10 rounded-[2rem] border border-[#e7d7b2] bg-[#fffdf9] shadow-[0_18px_36px_rgba(62,39,35,0.06)]">
+          <div className="px-5 py-5 sm:px-8 sm:py-6">
+            <div className="mb-4 flex items-center justify-between gap-3 border-b border-dashed border-[#ead7a4] pb-3">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">Popular picks</p>
+              <span className="text-xs text-[#6D4C41]">{previewServices.length} services</span>
+            </div>
+
+            <div className="space-y-3">
+              {previewServices.map((service) => (
+                <ServiceListRow key={service.slug} service={service} />
+              ))}
+            </div>
+
+            <div className="mt-6 text-center">
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fffaf0] px-4 py-2.5 text-sm font-semibold text-[#3E2723] transition-all hover:border-[#c9a227] hover:bg-[#fff7e7]"
               >
-                Message us on WhatsApp
-                <MessageCircleMore className="h-4 w-4" />
-              </a>
+                View All Services
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-          ) : (
-            <div className="divide-y divide-dashed divide-[#d8c79d]">
-              {activeTab === "All" && Object.entries(groupedServices).length > 0 ? (
-                Object.entries(groupedServices).map(([groupName, groupServices]) => (
-                  <div key={groupName} className="px-5 py-5 sm:px-8 sm:py-6">
-                    <div className="mb-4 flex items-center justify-between gap-3">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">{groupName}</p>
-                      <span className="text-xs text-[#6D4C41]">{groupServices.length} service{groupServices.length === 1 ? "" : "s"}</span>
-                    </div>
-
-                    <div className="space-y-3">
-                      {groupServices.map((service) => {
-                        const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-                          `Assalam-o-Alaikum, ${service.name} ka service chahiye.`
-                        )}`;
-
-                        return (
-                          <div
-                            key={service.slug}
-                            className="group flex flex-col gap-3 rounded-[1.2rem] border border-[#f0e4be] bg-[#fffdf9] p-4 transition-colors hover:bg-[#fffaf0] sm:flex-row sm:items-center sm:justify-between"
-                          >
-                            <div className="min-w-0 flex-1">
-                              <Link href={`/services/${service.slug}`} className="block">
-                                <h3 className="text-base font-bold tracking-[-0.02em] text-[#2B2118] transition-colors hover:text-[#6D4C41] sm:text-lg">
-                                  {service.name}
-                                </h3>
-                              </Link>
-                              <p className="mt-1 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
-                              <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
-                                {getPriceHint(service)}
-                              </p>
-                            </div>
-
-                            <div className="flex shrink-0 items-center gap-2">
-                              <Link
-                                href={`/services/${service.slug}`}
-                                className="inline-flex items-center gap-2 rounded-full border border-[#e7d7b2] bg-[#fff] px-3 py-2 text-xs font-semibold text-[#3E2723] transition-colors hover:border-[#c9a227] hover:bg-[#fff7e7]"
-                              >
-                                Get Service
-                                <ArrowRight className="h-3.5 w-3.5" />
-                              </Link>
-
-                              <a
-                                href={whatsappLink}
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label={`Chat on WhatsApp about ${service.name}`}
-                                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e7d7b2] bg-[#fff] text-[#3E2723] transition-all duration-300 hover:border-[#c9a227] hover:bg-[#fff7e7]"
-                              >
-                                <MessageCircleMore className="h-4 w-4" />
-                              </a>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))
-              ) : (
-                visibleServices.map((service) => {
-                  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-                    `Assalam-o-Alaikum, ${service.name} ka service chahiye.`
-                  )}`;
-
-                  return (
-                    <div
-                      key={service.slug}
-                      className="flex flex-col gap-3 border-b border-dashed border-[#ead7a4] px-5 py-5 transition-colors last:border-b-0 hover:bg-[#fffaf0] sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-6"
-                    >
-                      <div className="min-w-0 flex-1">
-                        <Link href={`/services/${service.slug}`} className="block">
-                          <h3 className="text-base font-bold tracking-[-0.02em] text-[#2B2118] transition-colors hover:text-[#6D4C41] sm:text-lg">
-                            {service.name}
-                          </h3>
-                        </Link>
-                        <p className="mt-1 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
-                        <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
-                          {getPriceHint(service)}
-                        </p>
-                      </div>
-
-                      <div className="flex shrink-0 items-center gap-2">
-                        <Link
-                          href={`/services/${service.slug}`}
-                          className="inline-flex items-center gap-2 rounded-full border border-[#e7d7b2] bg-[#fffaf0] px-3 py-2 text-xs font-semibold text-[#3E2723] transition-all duration-200 hover:border-[#c9a227] hover:bg-[#f8f0de]"
-                        >
-                          Get Service
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </Link>
-
-                        <a
-                          href={whatsappLink}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`Chat on WhatsApp about ${service.name}`}
-                          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e7d7b2] bg-[#fffaf0] text-[#3E2723] transition-all duration-300 hover:border-[#c9a227] hover:bg-[#f8f0de]"
-                        >
-                          <MessageCircleMore className="h-4 w-4" />
-                        </a>
-                      </div>
-                    </div>
-                  );
-                })
-              )}
-
-              {hasMore ? (
-                <div className="px-5 py-5 text-center sm:px-8">
-                  <button
-                    type="button"
-                    onClick={() => setShowAll(true)}
-                    className="inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fffaf0] px-4 py-2 text-sm font-semibold text-[#3E2723] transition-all hover:border-[#c9a227] hover:bg-[#fff7e7]"
-                  >
-                    Show all services
-                    <ArrowRight className="h-4 w-4" />
-                  </button>
-                </div>
-              ) : filteredServices.length > 9 ? (
-                <div className="px-5 py-5 text-center sm:px-8">
-                  <button
-                    type="button"
-                    onClick={() => setShowAll(false)}
-                    className="inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fffaf0] px-4 py-2 text-sm font-semibold text-[#3E2723] transition-all hover:border-[#c9a227] hover:bg-[#fff7e7]"
-                  >
-                    Show less
-                    <ArrowRight className="h-4 w-4 rotate-90" />
-                  </button>
-                </div>
-              ) : null}
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </section>
