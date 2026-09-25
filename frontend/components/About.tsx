@@ -1,4 +1,5 @@
 import { FileBadge2, ShieldCheck, Sparkles } from "lucide-react";
+import { site } from "@/src/config/site";
 
 export default function About() {
   return (
@@ -6,11 +7,11 @@ export default function About() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:px-8">
         <div className="rounded-[2rem] border border-[#e7d7b2] bg-[#F7F1E3] p-6 shadow-[0_18px_38px_rgba(62,39,35,0.08)] sm:p-8">
           <div className="rounded-[1.5rem] bg-[linear-gradient(145deg,#3E2723,#4D332E_48%,#6D4C41)] p-6 text-[#F7F1E3] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#d9b96b]">About M.KHAN</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#d9b96b]">About {site.businessName}</p>
             <h3 className="mt-3 text-3xl font-black tracking-[-0.05em] text-[#fffdf7]">Your local digital support hub.</h3>
             <div className="mt-6 space-y-4 text-sm leading-7 text-[#f4ecdf]">
               <p>
-                M.KHAN helps customers with everyday digital, documentation, printing, payment and online government services in one trusted place.
+                {site.businessName} helps customers with everyday digital, documentation, printing, payment and online government services in one trusted place.
               </p>
               <p>
                 Whether you need photocopies, online forms, Easypaisa or JazzCash assistance, NADRA support, or a quick print job, our goal is to make each task simple, fast and stress-free.
@@ -66,22 +67,13 @@ export default function About() {
       </div>
 
       <div className="mt-14 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-[#d7c09a] shadow-[0_20px_38px_rgba(62,39,35,0.10)]">
-          <div
-            className="relative flex min-h-[260px] items-center justify-center bg-cover bg-center px-6 py-10 sm:px-10"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(25, 18, 14, 0.7), rgba(25, 18, 14, 0.72)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=80')",
-            }}
-          >
-            <div className="relative z-10 max-w-3xl text-center text-[#f8efe2]">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#e7c96b]">M.KHAN</p>
-              <h3 className="mt-4 text-3xl font-black tracking-[-0.05em] sm:text-4xl">
-                Trusted local help for print, payments and digital needs.
-              </h3>
-              <p className="mt-4 text-sm leading-7 text-[#efe5d8] sm:text-base">
-                From photocopying and printing to Easypaisa, JazzCash, NADRA services and online applications, we make everyday digital work easier and faster.
-              </p>
+        <div className="mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-[#d7c09a] bg-[#f9f3ea] shadow-[0_20px_38px_rgba(62,39,35,0.10)]">
+          <div className="relative flex min-h-[260px] items-center justify-center border-2 border-dashed border-[#c9a227] bg-[#f9f3ea] px-6 py-10 sm:px-10">
+            <div className="text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#6D4C41]">Add your shop photo here</p>
+              <div className="mt-4 inline-flex items-center justify-center rounded-full border border-[#d9b96b] bg-[#fffdf7] px-5 py-2 text-sm font-semibold text-[#3E2723]">
+                Photo Placeholder
+              </div>
             </div>
           </div>
         </div>

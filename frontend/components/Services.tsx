@@ -62,6 +62,8 @@ const iconMap: Record<string, LucideIcon> = {
 
 const featuredServices = services.filter((service) => service.featured).slice(0, 4);
 
+const getPriceHint = (service: (typeof services)[number]) => service.pricing.amount || "Custom quote";
+
 const normalize = (value: string) => value.toLowerCase();
 
 const getBucket = (service: (typeof services)[number]): Exclude<Tab, "All"> => {
@@ -246,6 +248,11 @@ export default function Services() {
 
                 <p className="mt-3 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
 
+                <div className="mt-4 rounded-[0.9rem] border border-[#f0e4be] bg-[#fffaf0] px-3 py-2">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Price hint</p>
+                  <p className="mt-1 text-sm font-semibold text-[#2B2118]">{getPriceHint(service)}</p>
+                </div>
+
                 <div className="mt-auto pt-4">
                   <Link
                     href={`/services/${service.slug}`}
@@ -293,7 +300,7 @@ export default function Services() {
                         return (
                           <div
                             key={service.slug}
-                            className="group flex flex-col gap-3 rounded-[1.2rem] border border-[#f0e4be] bg-[#fffaf0] p-4 transition-colors hover:bg-[#fff7e7] sm:flex-row sm:items-center sm:justify-between"
+                            className="group flex flex-col gap-3 rounded-[1.2rem] border border-[#f0e4be] bg-[#fffdf9] p-4 transition-colors hover:bg-[#fffaf0] sm:flex-row sm:items-center sm:justify-between"
                           >
                             <div className="min-w-0 flex-1">
                               <Link href={`/services/${service.slug}`} className="block">
@@ -302,6 +309,9 @@ export default function Services() {
                                 </h3>
                               </Link>
                               <p className="mt-1 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
+                              <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
+                                {getPriceHint(service)}
+                              </p>
                             </div>
 
                             <div className="flex shrink-0 items-center gap-2">
@@ -338,7 +348,7 @@ export default function Services() {
                   return (
                     <div
                       key={service.slug}
-                      className="flex flex-col gap-3 px-5 py-5 transition-colors hover:bg-[#fffaf0] sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-6"
+                      className="flex flex-col gap-3 border-b border-dashed border-[#ead7a4] px-5 py-5 transition-colors last:border-b-0 hover:bg-[#fffaf0] sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-6"
                     >
                       <div className="min-w-0 flex-1">
                         <Link href={`/services/${service.slug}`} className="block">
@@ -347,6 +357,9 @@ export default function Services() {
                           </h3>
                         </Link>
                         <p className="mt-1 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
+                        <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
+                          {getPriceHint(service)}
+                        </p>
                       </div>
 
                       <div className="flex shrink-0 items-center gap-2">

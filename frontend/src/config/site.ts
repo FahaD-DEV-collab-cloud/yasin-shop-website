@@ -1,10 +1,16 @@
 export const site = {
+  businessName: "M KHAN NETCAFE",
   shopName: "M KHAN NETCAFE",
   owner: "YASIN KHOKHAR",
   phone: "+92 319 7802792",
   whatsapp: "923197802792",
+  facebookUrl: "",
+  instagramUrl: "",
+  customersServed: "500+",
+  establishedYear: 2021,
   address: "Jamia Masjid Road, Near Al Hafiz Bakers, Lalian",
   hours: "Mon-Sat • 9:00 AM - 9:00 PM",
+  openDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
   mapEmbedUrl:
     "https://www.google.com/maps?q=Jamia%20Masjid%20Road%20Near%20Al%20Hafiz%20Bakers%20Lalian&output=embed",
   services: [

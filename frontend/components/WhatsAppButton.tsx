@@ -2,7 +2,7 @@ import { MapPinned, MessageCircleMore, PhoneCall } from "lucide-react";
 import site from "@/src/config/site";
 
 export default function WhatsAppButton() {
-  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalamualaikum M.KHAN, I want to book a service.")}`;
+  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalam-o-Alaikum, mujhe ek service ke baare mein poochna hai.")}`;
   const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`;
 
   return (
@@ -12,7 +12,7 @@ export default function WhatsAppButton() {
         target="_blank"
         rel="noreferrer"
         aria-label="Chat on WhatsApp"
-        className="fixed bottom-5 right-5 z-50 hidden items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-[0_12px_25px_rgba(37,211,102,0.35)] transition-transform duration-200 hover:-translate-y-1 md:inline-flex"
+        className="fixed bottom-[92px] right-5 z-50 hidden items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-[0_12px_25px_rgba(37,211,102,0.35)] transition-transform duration-200 hover:-translate-y-1 md:inline-flex"
       >
         <MessageCircleMore className="h-5 w-5" />
         WhatsApp

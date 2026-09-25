@@ -10,6 +10,10 @@ const quickActions = [
 
 export default function Hero() {
   const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalam-o-Alaikum, main M KHAN NETCAFE se service lena chahta hoon.")}`;
+  const now = new Date();
+  const isOpenDay = now.getDay() >= 1 && now.getDay() <= 6;
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  const isOpenNow = isOpenDay && currentMinutes >= 9 * 60 && currentMinutes < 21 * 60;
 
   return (
     <section id="home" className="relative overflow-hidden pb-14 pt-8 sm:pb-16 lg:pb-20">
@@ -48,6 +52,17 @@ export default function Hero() {
             >
               WhatsApp
             </a>
+          </div>
+
+          <div className="mt-7 flex flex-wrap gap-3">
+            <div className="rounded-[1rem] border border-[#e8dcb5] bg-[#fffdf9] px-3 py-2 shadow-sm">
+              <p className="text-xl font-black tracking-[-0.05em] text-[#2B2118]">{site.customersServed}</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Customers helped</p>
+            </div>
+            <div className="rounded-[1rem] border border-[#e8dcb5] bg-[#fffdf9] px-3 py-2 shadow-sm">
+              <p className="text-xl font-black tracking-[-0.05em] text-[#2B2118]">{site.establishedYear}</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Since</p>
+            </div>
           </div>
 
           <div className="mt-7 grid max-w-xl grid-cols-2 gap-2 sm:grid-cols-4">
@@ -131,8 +146,8 @@ export default function Hero() {
 
               <div className="relative mt-4 flex items-center justify-between rounded-[1rem] border border-[#ead7a4] bg-[#fffaf0] px-4 py-3 shadow-[0_8px_20px_rgba(62,39,35,0.06)]">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.24em] text-[#6D4C41]">Open daily</p>
-                  <p className="mt-1 text-base font-semibold text-[#2B2118]">Mon–Sat • 9 AM to 9 PM</p>
+                  <p className="text-[10px] uppercase tracking-[0.24em] text-[#6D4C41]">{isOpenNow ? "Open now" : "Closed now"}</p>
+                  <p className="mt-1 text-base font-semibold text-[#2B2118]">{site.hours}</p>
                 </div>
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#3E2723] text-[#f8efe2]">
                   <BadgeCheck className="h-5 w-5" />
