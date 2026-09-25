@@ -4,11 +4,11 @@ type MobileMenuProps = {
 };
 
 const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
+  { label: "Why Us", href: "/#why-us" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
@@ -31,7 +31,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         ))}
 
         <a
-          href="#contact"
+          href="/#contact"
           onClick={onClose}
           className="mt-2 inline-flex items-center justify-center rounded-full bg-[#3E2723] px-4 py-3 text-sm font-semibold text-[#F7F1E3] shadow-sm"
         >

@@ -1,11 +1,11 @@
 import { ArrowUpRight, MapPin, MessageCircleMore, Phone } from "lucide-react";
 
 const quickLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
+  { label: "Why Us", href: "/#why-us" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Footer() {

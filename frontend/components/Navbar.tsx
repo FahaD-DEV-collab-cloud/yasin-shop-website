@@ -5,11 +5,11 @@ import { useState } from "react";
 import MobileMenu from "./MobileMenu";
 
 const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
+  { label: "Why Us", href: "/#why-us" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#d9cab3]/80 bg-[#fffdf7]/85 shadow-[0_8px_28px_rgba(62,39,35,0.06)] backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-        <a href="#home" className="flex items-center gap-3" aria-label="M.KHAN home">
+        <a href="/" className="flex items-center gap-3" aria-label="M.KHAN home">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#3E2723,#6D4C41)] text-lg font-black text-[#F7F1E3] shadow-[0_10px_22px_rgba(62,39,35,0.18)]">
             M
           </div>
@@ -43,7 +43,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex">
           <a
-            href="#contact"
+            href="/#contact"
             className="inline-flex items-center gap-2 rounded-full bg-[#3E2723] px-5 py-2.5 text-sm font-semibold text-[#F7F1E3] shadow-[0_12px_24px_rgba(62,39,35,0.14)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2a1c18]"
           >
             <PhoneCall className="h-4 w-4" />
