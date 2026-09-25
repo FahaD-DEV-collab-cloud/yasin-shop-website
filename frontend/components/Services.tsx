@@ -1,76 +1,48 @@
+import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
   BookOpenText,
   BriefcaseBusiness,
   FileText,
+  MessageCircleMore,
   Printer,
   Smartphone,
   WalletCards,
+  type LucideIcon,
 } from "lucide-react";
-import site from "@/src/config/site";
+import services from "@/src/data/services";
+import { site } from "@/src/config/site";
 
-const featured = [
-  {
-    key: "easypaisa",
-    title: "Easypaisa",
-    subtitle: "Cash in / out",
-    description: "Form bharwana hai? Paisa transfer chahiye? Bas aa jayen.",
-    icon: WalletCards,
-    tone: "dark",
-  },
-  {
-    key: "jazzcash",
-    title: "JazzCash",
-    subtitle: "Quick support",
-    description: "Cash in, transfer aur bill payment, sab yahin smooth ho jata hai.",
-    icon: Smartphone,
-    tone: "light",
-  },
-  {
-    key: "nadra",
-    title: "NADRA / E-Sahulat",
-    subtitle: "CNIC, forms, help",
-    description: "CNIC copy, form filling, aur general government support ready.",
-    icon: BadgeCheck,
-    tone: "light",
-  },
-  {
-    key: "jobs",
-    title: "Job Applications",
-    subtitle: "CV + forms",
-    description: "CV print karwana hai ya online form fill karwana hai? Hum help karte hain.",
-    icon: BriefcaseBusiness,
-    tone: "light",
-  },
-  {
-    key: "printing",
-    title: "Printing & Photocopy",
-    subtitle: "Fast & neat",
-    description: "A4, A3, notes, forms, documents — clean print aur copy, quick service.",
-    icon: Printer,
-    tone: "light",
-  },
-  {
-    key: "schemes",
-    title: "Government Schemes",
-    subtitle: "Application help",
-    description: "Scheme apply karni hai? Documents check kar lein, phir form fill kar dein.",
-    icon: BookOpenText,
-    tone: "light",
-  },
+const iconMap: Record<string, LucideIcon> = {
+  easypaisa: WalletCards,
+  jazzcash: Smartphone,
+  "nadra-e-sahulat": BadgeCheck,
+  "online-job-applications": BriefcaseBusiness,
+  "government-schemes": BookOpenText,
+  printing: Printer,
+  photocopy: FileText,
+  "color-printing": Printer,
+  "bank-services": BookOpenText,
+  "book-binding": BookOpenText,
+  "id-card-copy": BadgeCheck,
+  "songs-movies": Smartphone,
+};
+
+const featuredSlugs = [
+  "easypaisa",
+  "jazzcash",
+  "nadra-e-sahulat",
+  "online-job-applications",
+  "printing",
+  "government-schemes",
 ];
 
-const allServices = site.services.filter(
-  (service) =>
-    ![
-      "Easypaisa / JazzCash",
-      "NADRA / E-Sahulat",
-      "Online Job Applications",
-      "Government Schemes",
-      "Photocopy & Printing",
-    ].includes(service.name),
-);
+const featured = featuredSlugs
+  .map((slug) => services.find((service) => service.slug === slug))
+  .filter((service): service is (typeof services)[number] => Boolean(service));
+
+const allServices = services.filter((service) => !featuredSlugs.includes(service.slug));
 
 export default function Services() {
   return (
@@ -96,80 +68,153 @@ export default function Services() {
             </div>
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-[1.4rem] border border-[#ead9a7] bg-[#fffaf0] p-4">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">Cash in/out</p>
-                <h3 className="mt-2 text-2xl font-black tracking-[-0.05em] text-[#2B2118]">Easypaisa</h3>
-                <p className="mt-3 text-sm leading-6 text-[#5d514b]">
-                  Form bharwana hai? Paisa transfer chahiye? Bas aa jayen.
-                </p>
-              </div>
+              {featured.slice(0, 2).map((service) => {
+                const Icon = iconMap[service.slug] ?? WalletCards;
+                const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+                  `Assalam-o-Alaikum, ${service.name} ka rate aur details chahiye.`
+                )}`;
 
-              <div className="rounded-[1.4rem] border border-[#ead9a7] bg-[#f8f1e3] p-4">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">Quick wallet help</p>
-                <h3 className="mt-2 text-2xl font-black tracking-[-0.05em] text-[#2B2118]">JazzCash</h3>
-                <p className="mt-3 text-sm leading-6 text-[#5d514b]">
-                  Cash-in, transfer aur bill payment — simple aur fast.
-                </p>
-              </div>
+                return (
+                  <div
+                    key={service.slug}
+                    className="relative rounded-[1.4rem] border border-[#ead9a7] bg-[#fffaf0] p-4"
+                  >
+                    <a
+                      href={whatsappLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Chat on WhatsApp about ${service.name}`}
+                      className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#e2d4b5] bg-[#fffaf0] text-[#3E2723] transition-all hover:border-[#c9a227] hover:bg-[#fff7e7]"
+                    >
+                      <MessageCircleMore className="h-4 w-4" />
+                    </a>
+
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">
+                      {service.category}
+                    </p>
+
+                    <Link href={`/services/${service.slug}`} className="block">
+                      <h3 className="mt-2 text-2xl font-black tracking-[-0.05em] text-[#2B2118] transition-colors hover:text-[#6D4C41]">
+                        {service.name}
+                      </h3>
+                    </Link>
+
+                    <p className="mt-3 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
+
+                    <div className="mt-4 flex items-center gap-2">
+                      <Link
+                        href={`/services/${service.slug}`}
+                        className="inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fff] px-3 py-1.5 text-xs font-semibold text-[#3E2723] transition-colors hover:border-[#c9a227] hover:bg-[#fff7e7]"
+                      >
+                        Get Service
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </article>
 
-          <article className="group rounded-[1.75rem] border border-[#e9dcc2] bg-[#fffdf7] p-5 shadow-[0_18px_36px_rgba(62,39,35,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(62,39,35,0.11)]">
-            <div className="flex items-center justify-between gap-2">
-              <span className="rounded-full bg-[#f7f1e3] p-2 text-[#3E2723]">
-                <BadgeCheck className="h-4 w-4" />
-              </span>
-              <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">Govt help</span>
-            </div>
-            <h3 className="mt-5 text-2xl font-black tracking-[-0.05em] text-[#2B2118]">NADRA / E-Sahulat</h3>
-            <p className="mt-3 text-sm leading-6 text-[#5d514b]">
-              CNIC-related help, forms aur public service requests — clear aur quick.
-            </p>
-          </article>
+          {featured.slice(2, 5).map((service) => {
+            const Icon = iconMap[service.slug] ?? WalletCards;
+            const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+              `Assalam-o-Alaikum, ${service.name} ka rate aur details chahiye.`
+            )}`;
 
-          <article className="group rounded-[1.75rem] border border-[#e9dcc2] bg-[#fffdf7] p-5 shadow-[0_18px_36px_rgba(62,39,35,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(62,39,35,0.11)]">
-            <div className="flex items-center justify-between gap-2">
-              <span className="rounded-full bg-[#f7f1e3] p-2 text-[#3E2723]">
-                <BriefcaseBusiness className="h-4 w-4" />
-              </span>
-              <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">Apply</span>
-            </div>
-            <h3 className="mt-5 text-2xl font-black tracking-[-0.05em] text-[#2B2118]">Job Forms</h3>
-            <p className="mt-3 text-sm leading-6 text-[#5d514b]">
-              CV print karni hai? Online form fill karna hai? Hum dekh lete hain.
-            </p>
-          </article>
+            return (
+              <article
+                key={service.slug}
+                className="group relative rounded-[1.75rem] border border-[#e9dcc2] bg-[#fffdf7] p-5 shadow-[0_18px_36px_rgba(62,39,35,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(62,39,35,0.11)]"
+              >
+                <div className="absolute right-4 top-4 z-10">
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Chat on WhatsApp about ${service.name}`}
+                    className="flex h-8 w-8 items-center justify-center rounded-full border border-[#e2d4b5] bg-[#fffaf0] text-[#3E2723] transition-all hover:border-[#c9a227] hover:bg-[#fff7e7]"
+                  >
+                    <MessageCircleMore className="h-4 w-4" />
+                  </a>
+                </div>
+
+                <div className="flex items-center justify-between gap-2">
+                  <span className="rounded-full bg-[#f7f1e3] p-2 text-[#3E2723]">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6D4C41]">
+                    {service.category}
+                  </span>
+                </div>
+
+                <Link href={`/services/${service.slug}`} className="block">
+                  <h3 className="mt-5 text-2xl font-black tracking-[-0.05em] text-[#2B2118] transition-colors hover:text-[#6D4C41]">
+                    {service.name}
+                  </h3>
+                </Link>
+
+                <p className="mt-3 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
+
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fffaf0] px-3.5 py-2 text-sm font-semibold text-[#3E2723] transition-all duration-200 hover:border-[#c9a227] hover:bg-[#fff7e7] hover:text-[#6D4C41]"
+                >
+                  Get Service
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </article>
+            );
+          })}
 
           <div className="col-span-full w-full overflow-hidden rounded-[2rem] border border-[#e7d7b2] bg-[#fffdf9] shadow-[0_18px_36px_rgba(62,39,35,0.06)]">
             <div className="divide-y divide-dashed divide-[#d8c79d]">
-              {allServices.map((service, index) => (
-                <a
-                  key={service.name}
-                  href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-                    `Assalam-o-Alaikum, ${service.name} ka service chahiye.`
-                  )}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex items-center gap-4 px-5 py-5 transition-colors duration-300 hover:bg-[#fffaf0] sm:gap-6 sm:px-8 sm:py-6"
-                >
-                  <span className="hidden w-8 shrink-0 text-[11px] font-semibold tracking-[0.22em] text-[#6D4C41] sm:block">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+              {allServices.map((service, index) => {
+                const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+                  `Assalam-o-Alaikum, ${service.name} ka service chahiye.`
+                )}`;
 
-                  <div className="min-w-0 flex-1 md:grid md:grid-cols-[minmax(0,15rem)_1fr] md:items-baseline md:gap-8">
-                    <h3 className="text-base font-bold tracking-[-0.02em] text-[#2B2118] sm:text-lg">
-                      {service.name}
-                    </h3>
-                    <p className="mt-1 text-sm leading-6 text-[#5d514b] md:mt-0">
-                      {service.description}
-                    </p>
+                return (
+                  <div
+                    key={service.slug}
+                    className="group flex items-center gap-4 px-5 py-5 transition-colors duration-300 hover:bg-[#fffaf0] sm:gap-6 sm:px-8 sm:py-6"
+                  >
+                    <span className="hidden w-8 shrink-0 text-[11px] font-semibold tracking-[0.22em] text-[#6D4C41] sm:block">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <div className="min-w-0 flex-1 md:grid md:grid-cols-[minmax(0,15rem)_1fr] md:items-baseline md:gap-8">
+                      <Link href={`/services/${service.slug}`} className="block">
+                        <h3 className="text-base font-bold tracking-[-0.02em] text-[#2B2118] transition-colors hover:text-[#6D4C41] sm:text-lg">
+                          {service.name}
+                        </h3>
+                      </Link>
+
+                      <p className="mt-1 text-sm leading-6 text-[#5d514b] md:mt-0">{service.shortDescription}</p>
+                    </div>
+
+                    <div className="flex shrink-0 items-center gap-2">
+                      <Link
+                        href={`/services/${service.slug}`}
+                        className="inline-flex items-center gap-2 rounded-full border border-[#e7d7b2] bg-[#fffaf0] px-3 py-2 text-xs font-semibold text-[#3E2723] transition-all duration-200 hover:border-[#c9a227] hover:bg-[#f8f0de]"
+                      >
+                        Get Service
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+
+                      <a
+                        href={whatsappLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Chat on WhatsApp about ${service.name}`}
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-[#e7d7b2] bg-[#fffaf0] text-[#3E2723] transition-all duration-300 hover:translate-x-0.5 hover:border-[#c9a227] hover:bg-[#f8f0de]"
+                      >
+                        <MessageCircleMore className="h-4 w-4" />
+                      </a>
+                    </div>
                   </div>
-
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#e7d7b2] bg-[#fffaf0] text-[#3E2723] transition-all duration-300 group-hover:translate-x-1 group-hover:border-[#c9a227] group-hover:bg-[#f8f0de]">
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </a>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
