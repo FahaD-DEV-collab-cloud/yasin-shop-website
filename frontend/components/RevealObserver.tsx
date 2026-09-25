@@ -23,13 +23,13 @@ export default function RevealObserver() {
           observer.unobserve(target);
         });
       },
-      { threshold: 0.16, rootMargin: "0px 0px -20px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -10px 0px" }
     );
 
     const elements = document.querySelectorAll(".reveal");
     elements.forEach((element, index) => {
       const target = element as HTMLElement;
-      target.style.transitionDelay = `${index * 80}ms`;
+      target.style.transitionDelay = `${index * 40}ms`;
       observer.observe(target);
     });
 
