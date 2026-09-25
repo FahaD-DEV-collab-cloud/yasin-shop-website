@@ -11,6 +11,12 @@ export const site = {
   address: "Jamia Masjid Road, Near Al Hafiz Bakers, Lalian",
   hours: "Mon-Sat • 9:00 AM - 9:00 PM",
   openDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  announcements: [
+    { text: "New: Same-day NADRA support" },
+    { text: "Ask about bulk printing discounts" },
+    { text: "Now open Mon-Sat 9AM-9PM" },
+    { text: "Cash & digital payments available" },
+  ],
   mapEmbedUrl:
     "https://www.google.com/maps?q=Jamia%20Masjid%20Road%20Near%20Al%20Hafiz%20Bakers%20Lalian&output=embed",
   services: [

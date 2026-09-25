@@ -40,7 +40,7 @@ const iconMap: Record<string, LucideIcon> = {
   BadgeCheck: BadgeCheck,
 };
 
-const getPriceHint = () => "Affordable & Reasonable Charges";
+const getPriceHint = (service: Service) => service.pricing.amount || "Custom quote";
 
 export function ServiceCard({ service }: { service: Service }) {
   const Icon = iconMap[service.icon] ?? FileText;
@@ -68,7 +68,7 @@ export function ServiceCard({ service }: { service: Service }) {
       <div className="mt-auto pt-4">
         <div className="mb-3 rounded-xl border border-[#f0e4be] bg-[#fffaf0] px-3 py-2">
           <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Price hint</p>
-          <p className="mt-1 text-sm font-semibold text-[#2B2118]">{getPriceHint()}</p>
+          <p className="mt-1 text-sm font-semibold text-[#2B2118]">{getPriceHint(service)}</p>
         </div>
 
         <div className="flex items-center gap-2">

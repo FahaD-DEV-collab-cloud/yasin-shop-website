@@ -33,7 +33,7 @@ const categoryIcons = {
 
 export const normalize = (value: string) => value.trim().toLowerCase();
 
-export const getPriceHint = () => "Affordable & Reasonable Charges";
+export const getPriceHint = (service: (typeof services)[number]) => service.pricing.amount || "Custom quote";
 
 export const getBucket = (service: (typeof services)[number]): Exclude<Tab, "All"> => {
   const name = normalize(service.name);
@@ -280,7 +280,7 @@ export default function Services() {
 
                 <div className="mt-4 rounded-[0.9rem] border border-[#f0e4be] bg-[#fffaf0] px-3 py-2">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Price hint</p>
-                  <p className="mt-1 text-sm font-semibold text-[#2B2118]">{getPriceHint()}</p>
+                  <p className="mt-1 text-sm font-semibold text-[#2B2118]">{getPriceHint(service)}</p>
                 </div>
 
                 <div className="mt-auto pt-4">
@@ -315,7 +315,7 @@ export default function Services() {
                     </Link>
                     <p className="mt-1 text-sm leading-6 text-[#5d514b]">{service.shortDescription}</p>
                     <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">
-                      {getPriceHint()}
+                      {getPriceHint(service)}
                     </p>
                   </div>
 

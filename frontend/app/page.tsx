@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { site } from "@/src/config/site";
+import MidPageCta from "@/components/MidPageCta";
 
 const Navbar = dynamic(() => import("@/components/Navbar"), {
   loading: () => <div className="h-[72px] w-full bg-[#fffdf7]/80" aria-hidden="true" />,
@@ -121,6 +122,7 @@ export default function Home() {
           <Services />
           <About />
           <WhyChooseUs />
+          <MidPageCta />
           <Process />
           <WhatToBring />
           <FAQ />

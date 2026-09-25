@@ -1,8 +1,12 @@
+import services from "@/src/data/services";
+import site from "@/src/config/site";
+import AnimatedCounter from "./AnimatedCounter";
+
 const stats = [
-  { value: "10+", label: "Services" },
-  { value: "Mon–Sat", label: "9 AM–9 PM" },
-  { value: "Same-day", label: "Work" },
-  { value: "Fair", label: "Rates" },
+  { value: Number.parseInt(site.customersServed, 10) || 500, suffix: "+", label: "Customers helped", type: "counter" },
+  { value: services.length, suffix: "+", label: "Services", type: "counter" },
+  { value: "Mon–Sat", label: "9 AM–9 PM", type: "text" },
+  { value: "Same-day", label: "Work", type: "text" },
 ];
 
 export default function WhyChooseUs() {
@@ -17,14 +21,16 @@ export default function WhyChooseUs() {
         </div>
 
         <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {stats.map(({ value, label }) => (
+          {stats.map(({ value, suffix, label, type }) => (
             <div
               key={label}
               className="rounded-[1.5rem] border border-white/10 bg-white/5 px-5 py-6 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm"
             >
-              <div className="text-3xl font-black tracking-[-0.06em] text-[#fffdf7] sm:text-4xl">
-                {value}
-              </div>
+              {type === "counter" ? (
+                <AnimatedCounter value={Number(value)} suffix={suffix} />
+              ) : (
+                <div className="text-3xl font-black tracking-[-0.06em] text-[#fffdf7] sm:text-4xl">{value}</div>
+              )}
               <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e7d8b5]">
                 {label}
               </p>

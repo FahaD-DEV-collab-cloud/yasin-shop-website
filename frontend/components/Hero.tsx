@@ -1,4 +1,16 @@
-import { ArrowRight, BadgeCheck, Copy, FileText, Printer, WalletCards } from "lucide-react";
+import {
+  ArrowRight,
+  Award,
+  BadgeCheck,
+  Clock3,
+  Copy,
+  FileText,
+  Printer,
+  ShieldCheck,
+  WalletCards,
+} from "lucide-react";
+import AnnouncementBar from "@/components/AnnouncementBar";
+import PaymentPartnerStrip from "@/components/PaymentPartnerStrip";
 import site from "@/src/config/site";
 import { buildWhatsAppLink } from "@/src/utils/whatsapp";
 
@@ -9,6 +21,13 @@ const quickActions = [
   { label: "NADRA", message: "Assalam-o-Alaikum, NADRA / E-Sahulat form help chahiye. Please requirements aur process ke bary mein guide karain.", icon: BadgeCheck },
 ];
 
+const trustBadges = [
+  { label: "Verified Local Business", icon: ShieldCheck },
+  { label: "Fast Turnaround", icon: Clock3 },
+  { label: "Cash & Digital Payments", icon: WalletCards },
+  { label: `Trusted Since ${site.establishedYear}`, icon: Award },
+];
+
 export default function Hero() {
   const whatsappLink = buildWhatsAppLink("Assalam-o-Alaikum, mujhe M KHAN NETCAFE se service ke bary mein information chahiye. Please guide karain.");
   const now = new Date();
@@ -17,10 +36,13 @@ export default function Hero() {
   const isOpenNow = isOpenDay && currentMinutes >= 9 * 60 && currentMinutes < 21 * 60;
 
   return (
-    <section id="home" className="relative overflow-hidden pb-14 pt-8 sm:pb-16 lg:pb-20">
-      <div className="absolute inset-0 opacity-90" style={{ backgroundImage: "radial-gradient(circle at top left, rgba(201,162,39,0.18), transparent 24%), radial-gradient(circle at bottom right, rgba(109,76,65,0.16), transparent 28%), linear-gradient(135deg, rgba(255,255,255,0.28), rgba(255,255,255,0))" }} />
+    <>
+      <AnnouncementBar announcements={site.announcements} />
 
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:px-8">
+      <section id="home" className="relative overflow-hidden pb-14 pt-8 sm:pb-16 lg:pb-20">
+        <div className="absolute inset-0 opacity-90" style={{ backgroundImage: "radial-gradient(circle at top left, rgba(201,162,39,0.18), transparent 24%), radial-gradient(circle at bottom right, rgba(109,76,65,0.16), transparent 28%), linear-gradient(135deg, rgba(255,255,255,0.28), rgba(255,255,255,0))" }} />
+
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:px-8">
         <div>
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#e0c98d] bg-[#fffaf0] px-3 py-1.5 shadow-[0_8px_18px_rgba(62,39,35,0.04)]">
             <span className="h-2 w-2 rounded-full bg-[#c79d32]" />
@@ -89,6 +111,20 @@ export default function Hero() {
               </a>
             ))}
           </div>
+
+          <div className="mt-7 flex flex-wrap gap-2">
+            {trustBadges.map(({ label, icon: Icon }) => (
+              <div
+                key={label}
+                className="inline-flex items-center gap-2 rounded-full border border-[#e4d3a7] bg-[#fffaf1] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#5d514b]"
+              >
+                <Icon className="h-3.5 w-3.5 text-[#3E2723]" />
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <PaymentPartnerStrip />
         </div>
 
         <div className="relative flex justify-center">
@@ -164,7 +200,8 @@ export default function Hero() {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }
