@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { ServiceCard } from "@/components/ServiceCard";
 import services from "@/src/data/services";
-import { site } from "@/src/config/site";
+import { buildWhatsAppLink, getServiceRequestMessage, getServiceWhatsAppMessage } from "@/src/utils/whatsapp";
 
 export const tabs = ["All", "Payments", "Documents", "Government", "Education", "Other"] as const;
 export type Tab = (typeof tabs)[number];
@@ -189,7 +189,7 @@ export function ServiceCatalog() {
           <div className="rounded-[2rem] border border-[#e7d7b2] bg-[#fffdf9] px-5 py-12 text-center shadow-[0_18px_36px_rgba(62,39,35,0.06)]">
             <p className="text-lg font-bold text-[#2B2118]">No services found.</p>
             <a
-              href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalam-o-Alaikum, mujhe service ke liye contact karna hai.")}`}
+              href={buildWhatsAppLink("Assalam-o-Alaikum, mujhe service ke liye contact karna hai. Please rate aur requirements ke bary mein guide karain.")}
               target="_blank"
               rel="noreferrer"
               className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#e2d4b5] bg-[#fffaf0] px-4 py-2.5 text-sm font-semibold text-[#3E2723] transition-colors hover:border-[#c9a227] hover:bg-[#fff7e7]"
@@ -239,9 +239,7 @@ export default function Services() {
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {featuredServices.map((service) => {
             const Icon = Monitor;
-            const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-              `Assalam-o-Alaikum, ${service.name} ka rate aur details chahiye.`
-            )}`;
+            const whatsappLink = buildWhatsAppLink(getServiceWhatsAppMessage(service.name));
 
             return (
               <article
@@ -331,9 +329,7 @@ export default function Services() {
                     </Link>
 
                     <a
-                      href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-                        `Assalam-o-Alaikum, ${service.name} ka service chahiye.`
-                      )}`}
+                      href={buildWhatsAppLink(getServiceRequestMessage(service.name))}
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`Chat on WhatsApp about ${service.name}`}

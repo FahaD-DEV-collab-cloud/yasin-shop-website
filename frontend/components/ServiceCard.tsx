@@ -18,7 +18,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import services from "@/src/data/services";
-import { site } from "@/src/config/site";
+import { buildWhatsAppLink, getServiceRequestMessage } from "@/src/utils/whatsapp";
 
 type Service = (typeof services)[number];
 
@@ -44,9 +44,7 @@ const getPriceHint = () => "Affordable & Reasonable Charges";
 
 export function ServiceCard({ service }: { service: Service }) {
   const Icon = iconMap[service.icon] ?? FileText;
-  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-    `Assalam-o-Alaikum, ${service.name} ka service chahiye.`
-  )}`;
+  const whatsappLink = buildWhatsAppLink(getServiceRequestMessage(service.name));
 
   return (
     <article className="group flex h-full flex-col rounded-[1.5rem] border border-[#e8d5a3] bg-[#fffdf9] p-4 shadow-[0_12px_26px_rgba(62,39,35,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#d2b66c] hover:shadow-[0_18px_34px_rgba(62,39,35,0.08)]">

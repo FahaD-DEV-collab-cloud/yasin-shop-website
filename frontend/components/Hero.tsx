@@ -1,15 +1,16 @@
 import { ArrowRight, BadgeCheck, Copy, FileText, Printer, WalletCards } from "lucide-react";
 import site from "@/src/config/site";
+import { buildWhatsAppLink } from "@/src/utils/whatsapp";
 
 const quickActions = [
-  { label: "Print", message: "Print karwana hai. Kitna time lagega?", icon: Printer },
-  { label: "Photocopy", message: "Photocopy chahiye. Kitne pages ka?", icon: Copy },
-  { label: "Easypaisa", message: "Easypaisa cash in/out chahiye. Help kar dena.", icon: WalletCards },
-  { label: "NADRA", message: "NADRA / E-Sahulat form help chahiye. CNIC copy le jana hai?", icon: BadgeCheck },
+  { label: "Print", message: "Assalam-o-Alaikum, printing service chahiye. Please rate aur time required bata dain.", icon: Printer },
+  { label: "Photocopy", message: "Assalam-o-Alaikum, photocopy service chahiye. Please pages aur rate ke bary mein guide karain.", icon: Copy },
+  { label: "Easypaisa", message: "Assalam-o-Alaikum, Easypaisa service ke bary mein information chahiye. Please charges aur process bata dain.", icon: WalletCards },
+  { label: "NADRA", message: "Assalam-o-Alaikum, NADRA / E-Sahulat form help chahiye. Please requirements aur process ke bary mein guide karain.", icon: BadgeCheck },
 ];
 
 export default function Hero() {
-  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalam-o-Alaikum, main M KHAN NETCAFE se service lena chahta hoon.")}`;
+  const whatsappLink = buildWhatsAppLink("Assalam-o-Alaikum, mujhe M KHAN NETCAFE se service ke bary mein information chahiye. Please guide karain.");
   const now = new Date();
   const isOpenDay = now.getDay() >= 1 && now.getDay() <= 6;
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
@@ -69,7 +70,7 @@ export default function Hero() {
             {quickActions.map(({ label, message, icon: Icon }) => (
               <a
                 key={label}
-                href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`}
+                href={buildWhatsAppLink(message)}
                 target="_blank"
                 rel="noreferrer"
                 className="group flex items-center gap-2 rounded-full border border-[#e8dcb5] bg-[#fffdf9] px-2.5 py-2 text-[11px] font-medium text-[#3E2723] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#d5b457] hover:bg-[#fffaf0]"

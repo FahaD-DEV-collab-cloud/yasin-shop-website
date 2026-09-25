@@ -1,8 +1,9 @@
 import { MapPinned, MessageCircleMore, PhoneCall } from "lucide-react";
 import site from "@/src/config/site";
+import { buildWhatsAppLink, getGenericWhatsAppMessage } from "@/src/utils/whatsapp";
 
 export default function WhatsAppButton() {
-  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalam-o-Alaikum, mujhe ek service ke baare mein poochna hai.")}`;
+  const whatsappLink = buildWhatsAppLink(getGenericWhatsAppMessage());
   const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`;
 
   return (

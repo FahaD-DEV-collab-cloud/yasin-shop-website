@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Check, Clock3, Home, MessageCircleMore } from "lucide-react";
 import services from "@/src/data/services";
 import { site } from "@/src/config/site";
+import { buildWhatsAppLink, getServiceWhatsAppMessage } from "@/src/utils/whatsapp";
 
 const Navbar = dynamic(() => import("@/components/Navbar"), {
   loading: () => <div className="h-[72px] w-full bg-[#fffdf7]/80" aria-hidden="true" />,
@@ -92,8 +93,7 @@ export default async function ServicePage({ params }: PageProps) {
     .slice(0, 3)
     .map(({ item }) => item);
 
-  const whatsappMessage = `Assalam-o-Alaikum, ${service.name} ka rate aur details chahiye.`;
-  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappLink = buildWhatsAppLink(getServiceWhatsAppMessage(service.name));
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",

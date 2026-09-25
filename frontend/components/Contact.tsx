@@ -1,9 +1,10 @@
 import { Clock3, MapPin, MessageCircleMore, Phone } from "lucide-react";
 import site from "@/src/config/site";
+import { buildWhatsAppLink, getGenericWhatsAppMessage } from "@/src/utils/whatsapp";
 
 const contactDetails = [
   { icon: Phone, label: "Phone", value: site.phone, href: `tel:${site.phone.replace(/\s+/g, "")}` },
-  { icon: MessageCircleMore, label: "WhatsApp", value: site.phone, href: `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalamualaikum M.KHAN, I need assistance with a service.")}` },
+  { icon: MessageCircleMore, label: "WhatsApp", value: site.phone, href: buildWhatsAppLink(getGenericWhatsAppMessage()) },
   { icon: MapPin, label: "Address", value: site.address, href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}` },
   { icon: Clock3, label: "Opening Hours", value: site.hours, href: "#contact" },
 ];
@@ -52,7 +53,7 @@ export default function Contact() {
               </p>
 
               <a
-                href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalamualaikum M.KHAN, I need assistance with a service.")}`}
+                href={buildWhatsAppLink(getGenericWhatsAppMessage())}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 text-base font-semibold text-white shadow-[0_14px_28px_rgba(37,211,102,0.28)] transition-transform duration-200 hover:-translate-y-0.5"
