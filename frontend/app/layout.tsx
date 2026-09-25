@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import RevealObserver from "@/components/RevealObserver";
+import LocalBusinessSchema from "@/src/components/LocalBusinessSchema";
 import { site } from "@/src/config/site";
 import "./globals.css";
 
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-[var(--color-cream)] text-[var(--color-brown-900)]">
         <RevealObserver />
+        <LocalBusinessSchema />
         {children}
       </body>
     </html>
