@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Home } from "lucide-react";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import { ServiceCatalog } from "@/components/Services";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { site } from "@/src/config/site";
+
+const Navbar = dynamic(() => import("@/components/Navbar"), {
+  loading: () => <div className="h-[72px] w-full bg-[#fffdf7]/80" aria-hidden="true" />,
+});
+
+const Footer = dynamic(() => import("@/components/Footer"), {
+  loading: () => <div className="h-[180px] w-full bg-[#fffdf7]" aria-hidden="true" />,
+});
+
+const ServiceCatalog = dynamic(
+  () => import("@/components/Services").then((module) => module.ServiceCatalog),
+  {
+    loading: () => <div className="h-[520px] w-full animate-pulse bg-[#f7f1e3]" aria-hidden="true" />,
+  }
+);
+
+const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), {
+  loading: () => <div className="h-[64px] w-[64px] rounded-full bg-[#25D366]/20" aria-hidden="true" />,
+});
 
 export const metadata: Metadata = {
   title: `All Services | ${site.businessName}`,

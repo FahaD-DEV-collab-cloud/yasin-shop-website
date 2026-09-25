@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, Clock3, Home, MessageCircleMore } from "lucide-react";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import services from "@/src/data/services";
 import { site } from "@/src/config/site";
+
+const Navbar = dynamic(() => import("@/components/Navbar"), {
+  loading: () => <div className="h-[72px] w-full bg-[#fffdf7]/80" aria-hidden="true" />,
+});
+
+const Footer = dynamic(() => import("@/components/Footer"), {
+  loading: () => <div className="h-[180px] w-full bg-[#fffdf7]" aria-hidden="true" />,
+});
+
+const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), {
+  loading: () => <div className="h-[64px] w-[64px] rounded-full bg-[#25D366]/20" aria-hidden="true" />,
+});
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));

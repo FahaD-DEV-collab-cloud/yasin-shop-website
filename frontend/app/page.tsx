@@ -1,15 +1,52 @@
-import About from "@/components/About";
-import Contact from "@/components/Contact";
-import FAQ from "@/components/FAQ";
-import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
-import Navbar from "@/components/Navbar";
-import Process from "@/components/Process";
-import Reviews from "@/components/Reviews";
-import Services from "@/components/Services";
-import WhatToBring from "@/components/WhatToBring";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import WhyChooseUs from "@/components/WhyChooseUs";
+import dynamic from "next/dynamic";
+
+const Navbar = dynamic(() => import("@/components/Navbar"), {
+  loading: () => <div className="h-[72px] w-full bg-[#fffdf7]/80" aria-hidden="true" />,
+});
+
+const Hero = dynamic(() => import("@/components/Hero"), {
+  loading: () => <div className="h-[560px] w-full animate-pulse bg-[#f7f1e3]" aria-hidden="true" />,
+});
+
+const Services = dynamic(() => import("@/components/Services"), {
+  loading: () => <div className="h-[420px] w-full animate-pulse bg-[#f7f1e3]" aria-hidden="true" />,
+});
+
+const About = dynamic(() => import("@/components/About"), {
+  loading: () => <div className="h-[320px] w-full animate-pulse bg-[#f7f1e3]" aria-hidden="true" />,
+});
+
+const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), {
+  loading: () => <div className="h-[280px] w-full animate-pulse bg-[#f7f1e3]" aria-hidden="true" />,
+});
+
+const Process = dynamic(() => import("@/components/Process"), {
+  loading: () => <div className="h-[300px] w-full animate-pulse bg-[#f7f1e3]" aria-hidden="true" />,
+});
+
+const WhatToBring = dynamic(() => import("@/components/WhatToBring"), {
+  loading: () => <div className="h-[260px] w-full animate-pulse bg-[#f7f1e3]" aria-hidden="true" />,
+});
+
+const FAQ = dynamic(() => import("@/components/FAQ"), {
+  loading: () => <div className="h-[360px] w-full animate-pulse bg-[#f7f1e3]" aria-hidden="true" />,
+});
+
+const Reviews = dynamic(() => import("@/components/Reviews"), {
+  loading: () => <div className="h-[320px] w-full animate-pulse bg-[#f7f1e3]" aria-hidden="true" />,
+});
+
+const Contact = dynamic(() => import("@/components/Contact"), {
+  loading: () => <div className="h-[260px] w-full animate-pulse bg-[#f7f1e3]" aria-hidden="true" />,
+});
+
+const Footer = dynamic(() => import("@/components/Footer"), {
+  loading: () => <div className="h-[180px] w-full bg-[#fffdf7]" aria-hidden="true" />,
+});
+
+const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), {
+  loading: () => <div className="h-[64px] w-[64px] rounded-full bg-[#25D366]/20" aria-hidden="true" />,
+});
 
 export default function Home() {
   return (
