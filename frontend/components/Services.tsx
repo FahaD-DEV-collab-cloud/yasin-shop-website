@@ -234,6 +234,9 @@ export default function Services() {
           <h2 className="mt-4 text-3xl font-black tracking-[-0.05em] text-[#2B2118] sm:text-4xl">
             Fast service, honest help, and no running around.
           </h2>
+          <p className="mt-4 text-base leading-7 text-[#5d514b]">
+            From Photocopy and Color Printing to Easypaisa, JazzCash, NADRA / E-Sahulat, and Job Applications, we help Lalian residents with everyday document and digital tasks.
+          </p>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">

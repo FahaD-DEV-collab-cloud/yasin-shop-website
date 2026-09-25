@@ -59,7 +59,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-5 max-w-xl text-base leading-7 text-[#5d514b] sm:text-lg">
-            Form bharwana hai? Photocopy chahiye? Easypaisa, NADRA, job forms, printing — sab yahin, fast, accurate, and easy.
+            Form bharwana hai? Photocopy chahiye? Easypaisa, NADRA, job forms, printing — sab yahin for Lalian and nearby areas, fast, accurate, and easy.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

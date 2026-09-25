@@ -14,6 +14,9 @@ export default function About() {
                 {site.businessName} helps customers with everyday digital, documentation, printing, payment and online government services in one trusted place.
               </p>
               <p>
+                We are based in Lalian and proudly serve the local community with practical support for everyday digital and document needs.
+              </p>
+              <p>
                 Whether you need photocopies, online forms, Easypaisa or JazzCash assistance, NADRA support, or a quick print job, our goal is to make each task simple, fast and stress-free.
               </p>
             </div>
