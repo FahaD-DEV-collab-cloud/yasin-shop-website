@@ -80,7 +80,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="mt-7 flex flex-wrap gap-3">
+          {/* <div className="mt-7 flex flex-wrap gap-3">
             <div className="soft-ring rounded-[1.15rem] border border-[#e8dcb5] bg-[#fffdf9] px-3 py-2.5 shadow-sm">
               <p className="text-xl font-black tracking-[-0.05em] text-[#2B2118]">{site.customersServed}</p>
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Customers helped</p>
@@ -93,7 +93,7 @@ export default function Hero() {
               <p className="text-xl font-black tracking-[-0.05em] text-[#2B2118]">9 AM-9 PM</p>
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6D4C41]">Open six days</p>
             </div>
-          </div>
+          </div> */}
 
           <div className="mt-7 grid max-w-xl grid-cols-2 gap-2 sm:grid-cols-4">
             {quickActions.map(({ label, message, icon: Icon }) => (
@@ -124,7 +124,7 @@ export default function Hero() {
             ))}
           </div>
 
-          <PaymentPartnerStrip />
+          {/* <PaymentPartnerStrip /> */}
         </div>
 
         <div className="relative flex justify-center">
