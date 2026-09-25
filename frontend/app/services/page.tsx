@@ -24,36 +24,44 @@ const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), {
 });
 
 export const metadata: Metadata = {
-  title: `All Services | ${site.businessName}`,
+  title: "All Services in Lalian | M Khan Netcafe",
   description:
-    `${site.businessName} offers printing, photocopying, Easypaisa, JazzCash, NADRA support, admissions assistance, government forms, and digital help across Lalian.`,
+    "Find printing, photocopy, color printing, Easypaisa, JazzCash, NADRA support, job application help, and digital services in Lalian, Punjab.",
   keywords: [
     "all services Lalian",
-    "digital services Lalian",
-    "printing and photocopy Lalian",
-    "online job application support",
-    "government form help",
-    "NADRA support Lalian",
-    "admissions support",
-    "Easypaisa and JazzCash Lalian",
+    "printing shop Lalian",
+    "photocopy Lalian",
+    "color printing Lalian",
+    "Easypaisa shop Lalian",
+    "JazzCash shop Lalian",
+    "NADRA E-Sahulat Lalian",
+    "job application help Lalian",
+    "online forms Lalian",
+    "digital service center Lalian",
+    "computer shop Lalian",
+    "book binding Lalian",
+    "document scanning Lalian",
+    "ID card copy Lalian",
+    "passport size photo Lalian",
+    "M Khan Netcafe services Lalian",
   ],
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: `All Services | ${site.businessName}`,
+    title: "All Services in Lalian | M Khan Netcafe",
     description:
-      `${site.businessName} offers printing, photocopying, Easypaisa, JazzCash, NADRA support, admissions help, and local digital services in Lalian.`,
-    url: "https://mkhannetcafe.com/services",
+      "Discover all digital, printing, payment, and document services at M Khan Netcafe in Lalian, Punjab.",
+    url: "https://yasin-shop-website.vercel.app/services",
     siteName: site.businessName,
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `All Services | ${site.businessName}`,
+    title: "All Services in Lalian | M Khan Netcafe",
     description:
-      `${site.businessName} offers printing, photocopying, Easypaisa, JazzCash, NADRA support, admissions help, and local digital services in Lalian.`,
+      "Discover all digital, printing, payment, and document services at M Khan Netcafe in Lalian, Punjab.",
   },
 };
 

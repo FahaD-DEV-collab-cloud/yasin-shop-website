@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!service) {
     return {
-      title: "Service Not Found | M.KHAN Digital Service Center",
+      title: "Service Not Found | M Khan Netcafe Lalian",
       description: "Service details not found.",
       alternates: {
         canonical: "/services",
@@ -37,25 +37,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const nearbyLandmark = site.address.includes("Near") ? site.address.split("Near")[1].trim() : "Lalian";
+  const shortDescription = service.shortDescription.replace(/\.$/, "");
   const title = `${service.name} in Lalian | ${site.businessName}`;
-  const canonicalUrl = `https://mkhannetcafe.com/services/${service.slug}`;
+  const description = `${shortDescription} in Lalian, near ${nearbyLandmark}.`;
+  const canonicalUrl = `https://yasin-shop-website.vercel.app/services/${service.slug}`;
 
   return {
     title,
-    description: service.shortDescription,
+    description: description.length > 160 ? `${description.slice(0, 157)}...` : description,
     alternates: {
       canonical: `/services/${service.slug}`,
     },
     keywords: [
-      service.name,
+      `${service.name} Lalian`,
       `${service.name} in Lalian`,
+      `${service.name} near ${nearbyLandmark}`,
       site.businessName,
-      "digital service support",
-      "printing and documentation",
+      `digital service center Lalian`,
+      "Lalian Punjab",
     ],
     openGraph: {
       title,
-      description: service.shortDescription,
+      description,
       siteName: site.businessName,
       url: canonicalUrl,
       type: "website",
@@ -64,7 +68,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: "summary_large_image",
       title,
-      description: service.shortDescription,
+      description,
     },
   };
 }
