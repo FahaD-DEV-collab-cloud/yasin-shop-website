@@ -1,11 +1,11 @@
 export const site = {
   shopName: "M.KHAN Digital Service Center",
-  phone: "+92 300 0000000",
-  whatsapp: "923000000000",
-  address: "Main Bazaar, Lahore, Punjab, Pakistan",
+  phone: "+92 319 7802792",
+  whatsapp: "923197802792",
+  address: "Lalian, District Chiniot, Mohallah Jamia Masjid, Near Jamia Masjid",
   hours: "Mon-Sat • 9:00 AM - 9:00 PM",
   mapEmbedUrl:
-    "https://www.google.com/maps?q=Lahore%20Pakistan&output=embed",
+    "https://www.google.com/maps?q=Lalian%20Chiniot%20Jamia%20Masjid&output=embed",
   services: [
     {
       name: "Photocopy & Printing",
