@@ -1,5 +1,3 @@
-import site from "@/src/config/site";
-
 const reviews = [
   {
     name: "Ayesha",

@@ -18,9 +18,51 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: `${site.businessName} | Digital Services Center`,
+  metadataBase: new URL("https://mkhannetcafe.com"),
+  title: {
+    default: `${site.businessName} | Digital Services Center`,
+    template: `%s | ${site.businessName}`,
+  },
   description:
     `${site.businessName} offers online job applications, printing, photocopy, digital services, online forms, government support and local computer assistance in Lalian.`,
+  keywords: [
+    "M KHAN NETCAFE",
+    "digital services Lalian",
+    "printing shop Lalian",
+    "photocopy service Lalian",
+    "Easypaisa support",
+    "JazzCash help",
+    "NADRA support",
+    "online job applications",
+  ],
+  applicationName: site.businessName,
+  category: "local business",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: `${site.businessName} | Digital Services Center`,
+    description:
+      `${site.businessName} provides practical digital support, printing, photocopy, government forms, and local online help in Lalian.`,
+    url: "https://mkhannetcafe.com",
+    siteName: site.businessName,
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.businessName} | Digital Services Center`,
+    description:
+      `${site.businessName} provides practical digital support, printing, photocopy, government forms, and local online help in Lalian.`,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport = {
+  themeColor: "#f7f1e3",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

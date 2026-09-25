@@ -1,5 +1,3 @@
-import site from "@/src/config/site";
-
 const items = [
   { title: "NADRA / E-Sahulat", details: ["CNIC copy", "Phone number", "Passport photo", "Original form if available"] },
   { title: "Job applications", details: ["CNIC copy", "Phone number", "CV / file", "Passport photo"] },
