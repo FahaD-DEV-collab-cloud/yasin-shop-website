@@ -9,7 +9,7 @@ const quickActions = [
 ];
 
 export default function Hero() {
-  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalam-o-Alaikum, main M.KHAN Digital Service Center se service lena chahta hoon.")}`;
+  const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Assalam-o-Alaikum, main M KHAN NETCAFE se service lena chahta hoon.")}`;
 
   return (
     <section id="home" className="relative overflow-hidden pb-14 pt-8 sm:pb-16 lg:pb-20">

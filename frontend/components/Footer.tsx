@@ -1,4 +1,5 @@
 import { ArrowUpRight, MapPin, MessageCircleMore, Phone } from "lucide-react";
+import site from "../src/config/site";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -19,11 +20,11 @@ export default function Footer() {
                 M
               </div>
               <div>
-                <p className="text-lg font-black tracking-[0.14em] text-[#fffdf7]">M.KHAN</p>
+                <p className="text-lg font-black tracking-[0.14em] text-[#fffdf7]">M KHAN NETCAFE</p>
               </div>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-7 text-[#e9dfd1]">
-              Trusted local digital services, printing, documentation and payment support for everyday needs.
+              Trusted local digital services, printing, documentation and online government assistance for everyday needs.
             </p>
           </div>
 
@@ -56,22 +57,26 @@ export default function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-[#e9dfd1]">
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-[#d9b96b]" />
-                03XX-XXXXXXX
+                <a href={`tel:${site.phone.replace(/\s+/g, "")}`} className="hover:text-[#f4dc94]">
+                  {site.phone}
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <MessageCircleMore className="h-4 w-4 text-[#d9b96b]" />
-                03XX-XXXXXXX
+                <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer" className="hover:text-[#f4dc94]">
+                  {site.phone}
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-[#d9b96b]" />
-                Your Shop Address
+                {site.address}
               </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-10 border-t border-[#674d45] pt-6 text-center text-sm text-[#e9dfd1]">
-          © 2026 M.KHAN. All Rights Reserved.
+          © 2026 M KHAN NETCAFE. All Rights Reserved.
         </div>
       </div>
     </footer>

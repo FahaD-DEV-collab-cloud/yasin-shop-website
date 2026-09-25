@@ -17,9 +17,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "M.KHAN | Digital Services Center",
+  title: "M KHAN NETCAFE | Digital Services Center",
   description:
-    "Professional digital services center for photocopy, printing, Easypaisa, JazzCash, NADRA support and online application assistance.",
+    "M KHAN NETCAFE offers online job applications, printing, photocopy, digital services, online forms, government support and local computer assistance in Lalian.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

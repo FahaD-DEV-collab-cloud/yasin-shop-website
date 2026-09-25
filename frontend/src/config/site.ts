@@ -1,43 +1,104 @@
 export const site = {
-  shopName: "M.KHAN Digital Service Center",
+  shopName: "M KHAN NETCAFE",
+  owner: "YASIN KHOKHAR",
   phone: "+92 319 7802792",
   whatsapp: "923197802792",
-  address: "Lalian, District Chiniot, Mohallah Jamia Masjid, Near Jamia Masjid",
+  address: "Jamia Masjid Road, Near Al Hafiz Bakers, Lalian",
   hours: "Mon-Sat • 9:00 AM - 9:00 PM",
   mapEmbedUrl:
-    "https://www.google.com/maps?q=Lalian%20Chiniot%20Jamia%20Masjid&output=embed",
+    "https://www.google.com/maps?q=Jamia%20Masjid%20Road%20Near%20Al%20Hafiz%20Bakers%20Lalian&output=embed",
   services: [
     {
-      name: "Photocopy & Printing",
-      description: "Black & white, color, A4/A3, flyers, forms, and quick prints.",
-    },
-    {
-      name: "Easypaisa / JazzCash",
-      description: "Cash in, cash out, bill payments, and mobile wallet support.",
-    },
-    {
-      name: "NADRA / E-Sahulat",
-      description: "CNIC-related help, form filling, and government service support.",
-    },
-    {
       name: "Online Job Applications",
-      description: "CV printing, form submissions, and application guidance.",
+      description: "Online job, government, and private applications with guidance and support.",
     },
     {
-      name: "Government Schemes",
-      description: "Application help for local programs and documentation support.",
+      name: "Government & Private Job Applications",
+      description: "Application assistance for jobs, departments, and official online forms.",
     },
     {
-      name: "Book Binding",
-      description: "Reports, assignments, notebooks, and document binding work.",
+      name: "University & College Admissions",
+      description: "Admissions support for universities and colleges with document and form help.",
     },
     {
-      name: "ID Card Copy",
-      description: "ID card copy, document printouts, and scanning support.",
+      name: "Online Forms & Applications",
+      description: "Quick help with online forms, application submission, and document checks.",
     },
     {
-      name: "Songs & Movies",
-      description: "Media requests, USB copying, and local entertainment media help.",
+      name: "Loan Applications",
+      description: "Support for online banking and loan-related application processes.",
+    },
+    {
+      name: "FBR / Income Tax Return Services",
+      description: "Help with tax return and official filing-related online tasks.",
+    },
+    {
+      name: "Online Registration & Verification",
+      description: "Account registration, verification, and online ID-related guidance.",
+    },
+    {
+      name: "Biometric Services",
+      description: "Biometric process support and guidance for official documentation needs.",
+    },
+    {
+      name: "Mobile Accessories",
+      description: "Basic mobile accessory support and quick device-related assistance.",
+    },
+    {
+      name: "Printing & Color Printing",
+      description: "Fast printing, color printing, and document output for everyday needs.",
+    },
+    {
+      name: "Photocopy / Xerox",
+      description: "Quick photocopy and xerox services for documents, notes, and forms.",
+    },
+    {
+      name: "Composing & Typing",
+      description: "Typing, form composition, and document preparation support.",
+    },
+    {
+      name: "Passport Size Photos",
+      description: "Passport-size photo printing and standard document photo support.",
+    },
+    {
+      name: "Photo Editing & Document Scanning",
+      description: "Photo editing, document scanning, and digital file preparation.",
+    },
+    {
+      name: "Document Scanning",
+      description: "Scan and digitize physical documents, forms, and certificates.",
+    },
+    {
+      name: "Email & Online Account Assistance",
+      description: "Support with email setup, online accounts, and account access help.",
+    },
+    {
+      name: "All Online Government Services",
+      description: "Guidance for online government services and official digital procedures.",
+    },
+    {
+      name: "CV / Resume Making",
+      description: "Professional CV and resume writing support for job applications.",
+    },
+    {
+      name: "Computer & Internet Services",
+      description: "Computer assistance, internet support, and digital service help.",
+    },
+    {
+      name: "Online Certificates / Documents",
+      description: "Online certificate, document, and file assistance for official needs.",
+    },
+    {
+      name: "Visa & Travel-Related Online Applications",
+      description: "Support for visa and travel-related online applications and forms.",
+    },
+    {
+      name: "Polio Certificate / Online Record Services",
+      description: "Support for online record and certificate-related procedures.",
+    },
+    {
+      name: "Online Banking / Digital Application Assistance",
+      description: "Help with digital banking and online application support.",
     },
   ],
 };

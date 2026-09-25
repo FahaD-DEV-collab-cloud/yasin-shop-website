@@ -18,12 +18,12 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#d9cab3]/80 bg-[#fffdf7]/85 shadow-[0_8px_28px_rgba(62,39,35,0.06)] backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-        <a href="/" className="flex items-center gap-3" aria-label="M.KHAN home">
+        <a href="/" className="flex items-center gap-3" aria-label="M KHAN NETCAFE home">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#3E2723,#6D4C41)] text-lg font-black text-[#F7F1E3] shadow-[0_10px_22px_rgba(62,39,35,0.18)]">
             M
           </div>
           <div>
-            <p className="text-lg font-black tracking-[0.16em] text-[#3E2723]">M.KHAN</p>
+            <p className="text-lg font-black tracking-[0.14em] text-[#3E2723]">M KHAN</p>
           </div>
         </a>
 

@@ -45,7 +45,7 @@ export default function Contact() {
             </div>
 
             <div className="flex flex-col justify-center rounded-[1.75rem] bg-[linear-gradient(160deg,#3E2723,#4A312D_60%,#6D4C41)] p-6 text-[#F7F1E3] shadow-[0_20px_38px_rgba(62,39,35,0.18)]">
-              <p className="text-xs uppercase tracking-[0.25em] text-[#d7b972]">M.KHAN</p>
+              <p className="text-xs uppercase tracking-[0.25em] text-[#d7b972]">M KHAN NETCAFE</p>
               <h3 className="mt-3 text-3xl font-black tracking-[-0.05em] text-[#fffdf7]">Need quick support?</h3>
               <p className="mt-3 max-w-md text-sm leading-7 text-[#f0e7d8]">
                 Visit our shop or send a message on WhatsApp for quick assistance with printing, payment, government and digital services.
